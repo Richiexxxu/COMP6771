@@ -11,22 +11,39 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{xcolor}
-\lstset{
-    numbers=left, 
-    numberstyle= \tiny, 
-    keywordstyle= \color{ blue!70},
-    commentstyle= \color{red!50!green!50!blue!50}, 
-    frame=shadowbox, % 阴影效果
-    rulesepcolor= \color{ red!20!green!20!blue!20} ,
-    escapeinside=``, % 英文分号中可写入中文
-    xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
-    framexleftmargin=2em
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+        language=Java,                
+  basicstyle=\footnotesize,     
+  numbers=left,               
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,                                       
+  numbersep=5pt,                 
+  backgroundcolor=\color{white},  
+  showspaces=false,             
+  showstringspaces=false,         
+  showtabs=false,                 
+  frame=single,                   
+  rulecolor=\color{black},       
+  tabsize=4,                   
+  captionpos=b,        
+  breaklines=true,             
+  breakatwhitespace=false,       
+  title=\lstname,                                                  
+  keywordstyle=\color{blue},          
+  commentstyle=\color{dkgreen},    
+  stringstyle=\color{mauve},       
+  escapeinside={\%*}{*},        
+  morekeywords={*,...}
 } 
 
 \setlength{\droptitle}{-6em}
 
 % Enter the specific assignment number and topic of that assignment below, and replace "Your Name" with your actual name.
-\title{Assignment 1: Comp 6771 Image Processing}
+\title{Assignment 2: Comp 6771 Image Processing}
 \author{Yunqi Xu 40130514}
 \date{\today}
 
@@ -43,7 +60,7 @@
     %    Title
     %------------------------------------------------------------
 
-    {\Huge COMP 6771 Image Processing: Assignment 1}
+    {\Huge COMP 6771 Image Processing: Assignment 2}
 
     \vspace{0.025\textheight}   % Whitespace between the title and short horizontal rule
 
@@ -74,287 +91,281 @@
 % \vspace*{40em}
 \item Question 1
     \begin{enumerate}
-    \item  Explain why the discrete histogram equalization technique does not, in general, yield a flat histogram.
-    \vspace*{1em}
-    If we want a flat histogram, we need to guarantee each component has the same pixels in it. 
-    Let's set $n$ be the total number of pixels, and $L$ be the intensity levels. 
-    The flat histogram will require each component has $n/L$ number of pixels. 
-    However, the Histogram Equalization process will re-mapping the pixels only based on their intensity level.
-    So, we can not control the number of pixels in each conponent, it is difficult to yield a flat histogra. 
-    
-    \item Suppose that a digital image is subjected to histogram equalization. Please elaborate why a second pass of histogram equalization (on the histogram-equalized image) will produce exactly the same result as the first pass.
-    \vspace*{1em}
-    Suppose an image has already pass a histogram equalization. 
-    Input this image into the second second pass of histogram equalization. 
-    Let $n$ is the total number of pixels, and $L$ is the intensity level.
+    \item The minimum size of the blur mask is a 7 * 7 filter.
+    Since the averaging filter will calculate the average of the pixels contined in the neighborhood of the filter mask. 
+    No matter the coefficient value off the average filter is. 
+    If all pixels in the filter mask are zero, the output is zero. 
+    Based on the question, the gaps ranging from 1 to 5 pixels. 
+    So the minimum kernal size should greater than 5 to avoid the zero output.
+    Also, the kernel size usually is odd number.
+    So, 7 * 7 is the minimum size.
 
-        $$
-        s_k = T(r_k) = (L-1)\sum{j=0}^k n_{rj}/n = \frac{L-1}{n} \sum_{j=0}^k n_{rj} = (L-1)\sum_{j = 0}^k p_r(rj)
-        $$
-        we will use the equation mentioned above to calculate the $s_k$.
-        Since every pixel belong to $r_k$ is distributed to $s_k$.
-        So, the $n_{sk}$ = $n_{rk}$
-        $$
-        p_s(s_k) = n_{sk} / n = n_{rk} / n = p_r(r_k)
-        $$
-        Also, no matter how many iterations,
-        $$
-        new_k = (L-1)\sum_{j=0}^k p_s(s_k) = (L-1)\sum_{j=0}^k p_r(r_k) = s_k
-        $$
-        Therefore, the second pass will get the same result as the first pass. 
+    \vspace*{1em}
+
+    
+    \item Based on the question, we want those ouput which the filter center located on the string or hole(and be filled) equal or greater than the threshold and keep those value.
+    Suppose the center of the filter located at a center of a gap. 
+    In this case, the filter will have a minimum output that we want to convert it value. 
+    Also, the maximum size of gap is 5 pixels.  
+    If we want to use thresholding method to convert it back at the meanwhile keep string without small hole or noise, we need to guarantee that the minimum ouput greater than threshold.
+    So, suppose we get S as the minumum useful output.
+    We will set threshold closely less than S, but not less too much. 
+    To do this, we can keep string without small hole and abvoid to bring more noise during the threshold process.
+    \vspace*{1em}
+
 
     \end{enumerate}
 
+\item Question 2
 
-\item Given two arbitrary images f(x,y) and g(x,y) and two arbitrary constant a and b, H is said to be a linear operator if:
-$$
-        H[af(x, y) + bg(x, y)] = aH[f(x,y) + bH[g(x,y)]]
-$$
-The median m of a set of numbers is such that half the values in the set are below m and the other half are above it (the mid-point value by population). Is an operator that computes the median of a set of pixels of a sub-image area linear or nonlinear? Explain your answer by giving examples.
+The 5-by-5 Laplacian like filter has been shown in Eq.~\ref{q2_eq1} below: 
+
+\begin{equation}
+\begin{bmatrix}
+        0 & 0 & 1   & 0 & 0 \\
+        0 & 1 & 2   & 1 & 0 \\
+        1 & 2 & -16 & 2 & 1 \\
+        0 & 1 & 2   & 1 & 0 \\
+        0 & 0 & 1   & 0 & 0 
+\end{bmatrix}
+\label{q2_eq1}
+\end{equation}
+
+The basic rule is the sum of all coefficient is 0.
+
+We will use $g(x, y) = f(x,y) - \bigtriangledown^2 f(x,y) $ to sharpen an image.
+Compared with filters in question, this one will output an image sharper result.
+Because, the center of the 5-by-5 filters have more weight than $-4$ or $-8$.
+So, the edge of the image will be further enhence.
 
 \vspace*{1em}
-In general, the median operator is not linear operator.
-Since we can not control the order of values in $f(x,y)$ or $g(x,y)$.
-We will re-order the values in $f(x,y)$ and $g(x,y)$ and the the result of $af(x,y) + bg(x,y)$ before we get the median value.
 
-In some specific case, median operator will be linear, for example, if the the median value located in the center of $f(x,y)$ and $g(x,y)$ and the value in the left are smaller or equal then the median and the values in the right are greater or equal than the median in both $f(x,y)$ and $g(x,y)$, and after $af(x,y) + bg(x,y)$ the result still folloing the rules mentioned above, H will be a linear operator.
-
-For example, suppose $f(x,y) = [1, -3, 5, 7, 9]$ and $g(x,y) = [2,4,6,8,10]$ and $a = 2$, $b = 3$. 
-        \begin{equation}
-        \begin{aligned}
-        H[af(x,y) + bg(x,y)]
-        &= H[[2, -6, 10, 14, 18] + [6, 12, 18, 24, 30]]\\
-        &= H[8, 6, 28, 38, 48]\\
-        &= 28
-        \label{q2_1}
-        \end{aligned}
-        \end{equation}
-        
-        \begin{equation}
-        \begin{aligned}
-        aH[f(x,y)] + bH[g(x,y)]
-        &= 2*H[5] + 3*H[6]\\
-        &= 10 + 18\\
-        &= 28
-        \label{q2_2}
-        \end{aligned}
-        \end{equation}
-Therefore, we can find that the Eq.~\ref{q2_1} $=$ Eq.~\ref{q2_2}.        
-
-On the other hand, If the values in $f(x,y)$ and $g(x,y)$ not following the rules mentioned about, the H is not a linear operator.
-
-For example, Let us set $f(x,y) = [1, 3, -5, 7, 9]$ and $g(x,y) = [2, 4, 6, 8 10]$, also, $a = 2$, $b = 3$.
-        \begin{equation}
-        \begin{aligned}
-        H[af(x,y) + bg(x,y)]
-        &= H[[2, 6, -10, 14, 18] + [6, 12, 18, 24, 30]]\\
-        &= H[8, 18, 8, 38,48]\\
-        &= 18
-        \label{q2_3}
-        \end{aligned}
-        \end{equation}
-        
-        \begin{equation}
-        \begin{aligned}
-        aH[f(x,y)] + bH[g(x,y)]
-        &= 2*H[3] + 3*H[6]\\
-        &= 6 + 18\\
-        &= 24
-        \label{q2_4}
-        \end{aligned}
-        \end{equation}
-Therefore, the Eq.~\ref{q2_3} $\neq$ Eq.~\ref{q2_4}.
-
-
-\item  The purpose of this question is to perform histogram equalization to a given histogram and plot the resulting histogram. Given the following histogram where GL is Gray level, and NP is Number of pixels:
-\includegraphics[]{Figure/Q3.Table_1.png}
-
-        \begin{enumerate}
-                \item Plot the histogram of the image given in the table above
-                        \begin{figure}[H]
-                        \centering
-                        \includegraphics[]{Figure/Q3_a.png}
-                        \caption{Histogram image}
-                        \label{q3_a}
-                        \end{figure}
-                The Fig.~\ref{q3_a} presents the histogram based on the given table.
-                \begin{enumerate}
-                        \item Calculate sk from the table
-                        \begin{figure}[H]
-                        \centering
-                        \includegraphics[]{Figure/Q3_b_1.png}
-                        \caption{Calculation result}
-                        \label{q3_b_1}
-                        \end{figure}
-                        The Fig.~\ref{q3_b_1} shows the calculation result of $s_k$. 
-                        In This Figure, Let GL be the Gray Level $r_k$, and $NP$ is the number of pixels with value $r_k$, we will use $n_k$ later. Based on the given table, the total pixel $n = 256$, and $L = 15$
-                        \begin{equation}
-                                p_r(r_k) = \frac{n_k}{n} 
-                        \label{eq_q3_b_1}
-                        \end{equation}
-                        \begin{equation}
-                                s_k = \frac{L-1}{n}\sum_{j = 0}^k n_j
-                        \label{eq_q3_b_2}
-                        \end{equation}
-                        And in the Fig.~\ref{q3_b_1}, we utilize the Eq.~\ref{eq_q3_b_1} and Eq.~\ref{eq_q3_b_2} to calcuation the $p_r(r_k)$ and $s_k$ respectively.
-                \end{enumerate}
-                \vspace*{2em}
-
-                \item Plot the probability density functions pr (rk) and ps (sk)
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/Q3_b_2.png}
-                \caption{Calculation of ps(sk)}
-                \label{q3_b_2}
-                \end{figure}
-                We following the Histogram Equalization process to calculate those values in Fig.~\ref{q3_b_2}.
-
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/q3_pr.png}
-                \caption{Probability densi function for pr(rk)}
-                \label{q3_pr}
-                \end{figure}
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/q3_ps.png}
-                \caption{Probability density function for ps(sk)}
-                \label{q3_ps}
-                \end{figure}
-                Finally, we will get two probability density function present in Fig.~\ref{q3_pr} and Fig.~\ref{q3_ps}.
-
-                \item Plot the new histogram after performing the histogram equalization.
-                
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/q3_d.png}
-                \caption{New histogram after histogram equalization}
-                \label{q3_d}
-                \end{figure}
-                
-                The new histogram is presented in Fig.~\ref{q3_d}.
-                
-        \end{enumerate}
-
-
-\item The Given two images f(x,y) and g(x,y) with histogram hf and hg . Assuming that all the pixels of image g(x,y) have the same intensity equal to a non-zero positive constant value c. The gray levels of the pixels of both images have positive values. Please explain the relationship between the histograms of f(x,y) and the new images formed by f(x,y) + g(x,y) and f(x,y)*g(x,y)
-
+\item Question2 Fourier Transform Queston
 \begin{enumerate}
-        \item Since all the pixels of image $g(x,y)$ have the same intensity equal to a non-zero positive constant value $c$. 
-        Set, $n(r_k)$ be the number of pixels belong to the intensity level $r_k$, then, the $f(x,y) + g(x,y) = f(x,y) + c$, So, the $n(r_k)$ will not change, but $r_k' = r_k + c$. 
-        So, the histogram of new image $f(x,y)+g(x,y)$ will have the same hight as the histogram of $f(x,y)$ but all components will move to right with c.
-        \item As mentioned above, t$f(x,y) * g(x,y) = f(x,y) * c$, So the hight will not change after the product operator, but the distance beteen each conponent will be enlarged by c, as $r_k' = r_k * c$. 
-        For example, $r_k = 1$ will go to $r_k = c$ and $r_k = 2$ will go to $r_k = 2c$, $r_k = 3$ will go to $r_k = 3c$ ...
+        \item Based on the question, the Eq.~\ref{q2_eq2} defines the variable t.
+        \begin{equation}
+                f(t) =
+                \begin{cases}
+                A & 0 \leq t \leq W \\
+                0 & otherwase 
+                \end{cases}   
+        \label{q2_eq2}    
+        \end{equation}
+        
+
+        \begin{equation}
+        \begin{aligned}
+        F(\mu)
+        &= \int_{-\infty}^{+\infty}f(t) e^{-j2 \pi \mu t}dt\\
+        &= \int_0^W A e^{-j2 \pi \mu t} dt\\
+        &= \frac{-A}{j2 \pi \mu} [e^{-j 2 \pi \mu t}]_{0}^{W}\\
+        &= \frac{-A}{j2 \pi \mu} [e^{-j 2 \pi \mu W}  - 1]\\
+        &= \frac{A}{j2 \pi \mu} [1 - e^{-j2 \pi \mu W}]\\
+        &= \frac{A}{j2 \pi \mu} [e^{j \pi \mu W - e^{-j \pi \mu W}}]e^{-j \pi \mu W}\\
+        &= AW (\frac{sin(\pi \mu W)}{\pi \mu W}) e^{-j \pi \mu W}
+        \label{q2_eq3}
+        \end{aligned}
+        \end{equation}
+        Since $A = W = 1 $, In the Example, the result is:
+        \begin{equation}
+            F(\mu) = AW \frac{sin(\pi \mu W)}{\pi \mu W} = \frac{sin(\pi \mu)}{\pi \mu}
+        \label{q2_eq4}
+        \end{equation}
+        And the result of Eq.~\ref{q2_eq3} is:
+        \begin{equation}
+            F(\mu) = \frac{sin(\pi \mu)}{\pi \mu} e^{-j \pi \mu}
+        \label{q2_eq5}
+        \end{equation}
+        Compared with these two equation Eq.~\ref{q2_eq4} and Eq.~\ref{q2_eq5}, the only different part is $e^{-j \pi \mu}$. So the case in this problem is a shifted part compared the resul of Example 4.1.
+        \vspace*{1em}
+        \item   
+        Based on the property of Convolution:
+        $$
+            f(t) \star h(t) \Longleftrightarrow H(\mu)F(\mu)
+        $$
+        
+        \begin{equation}
+        f(t) =
+        \begin{cases}
+        A & \frac{-W}{2} \leq t \leq \frac{W}{2} \\
+        0 & otherwase 
+        \end{cases}   
+        \label{q2_eq6}    
+        \end{equation}
+        Based on the information provided by the right image in question, the Eq.~\ref{q2_eq6} is the equation.
+
+        \begin{equation}
+        \begin{aligned}
+        F(\mu)
+        &= \int_{-\infty}^{+\infty}f(t) e^{-j2 \pi \mu t}dt\\
+        &= \int_{\frac{-W}{2}}^{\frac{W}{2}} A e^{-j2 \pi \mu t} dt\\
+        &= \frac{-A}{j2 \pi \mu} [e^{-j 2 \pi \mu t}]_{\frac{-W}{2}}^{\frac{W}{2}}\\
+        &= AW (\frac{sin(\pi \mu W)}{\pi \mu W})
+        \label{q2_eq7}
+        \end{aligned}
+        \end{equation}
+
+        Based on the property of convolution and Eq.~\ref{q2_eq7}, the Fourier Transform of the tent function is: 
+        \begin{equation}
+        \begin{aligned}
+        F(\mu)F(\mu)
+        &= A^2 W^2 \frac{sin^2(\pi \mu W)}{\pi^2 \mu^2 W^2}\\
+        &= A^2 \frac{sin^2(\pi \mu W)}{\pi^2 \mu^2}
+        \label{q2_eq8}
+        \end{aligned}
+        \end{equation}
+
+
+        \vspace*{1em}
+        
 \end{enumerate}
 
-\item Download the image from the assignment folder, and perform the following operations using MATLAB or any software packages you are familiar with. Please show your steps in the report.
+\item Question 3.
+\begin{enumerate}
+\item The code has been shown below
+
 \begin{lstlisting}
 import numpy as np
 import cv2
-from matplotlib import pyplot as plt
+
+
+# read image
+def readimg(path):
+    return cv2.imread(path, 0)
+
+# Generate a Gaussian filter
+def GaussinFilter(sigma, size):
+    m = (size - 1.) / 2.
+    n = (size - 1.) / 2.
+    y, x = np.ogrid[-m:m + 1, -n: n + 1]
+    h = np.exp(-(x * x + y * y) / (2. * sigma * sigma))
+    h[h < np.finfo(h.dtype).eps * h.max()] = 0
+    all_sum = h.sum()
+    if all_sum != 0:
+        h /= all_sum
+    return h
+
+
+
+# Using gaussian to get the weighted aaverage.
+def weightedSum(input_subimage, input_filter, filter_size):
+    new_subimage = np.zeros((filter_size, filter_size))
+    for y in range(filter_size):
+        for x in range(filter_size):
+            new_subimage[y, x] = input_subimage[y, x] * input_filter[y, x]
+    return sum(sum(new_subimage))
+
+
+def averagingFilter(input_image, input_filter, filter_size):
+    image_height, image_width = input_image.shape[0], input_image.shape[1]
+    output_image = np.zeros((image_height,image_width))
+    padding_size = int((filter_size - 1) / 2)
+    padding_short = np.zeros((padding_size, image_width))
+    padding_long = np.zeros((image_height + (filter_size - 1), padding_size))
+    padded_image = np.r_[padding_short, input_image]
+    padded_image = np.r_[padded_image, padding_short]
+    padded_image = np.c_[padding_long, padded_image]
+    padded_image = np.c_[padded_image, padding_long]
+
+    for y in range(padding_size, image_height + padding_size):
+        for x in range(padding_size, image_width + padding_size):
+            sub_image = padded_image[y - padding_size: y + (padding_size + 1), x - padding_size: x + (padding_size + 1)]
+            output_image[y - padding_size, x - padding_size] = weightedSum(
+                                        input_subimage=sub_image, 
+                                        input_filter=input_filter, 
+                                        filter_size=filter_size)
+    return output_image
+
+
+
+def calculateThreshold(input_image, C):
+    image_height, image_width = input_image.shape
+    output_image = np.zeros((image_height,image_width))
+    for y in range(image_height):
+        for x in range(image_width):
+            output_image[y, x] = input_image[y, x] - C
+    return output_image
+
+
+# threshold the image
+def threshold(input_image, max_value, threshold):
+    output_image = np.zeros((input_image.shape[0], input_image.shape[1]))
+    height, width = input_image.shape
+    for y in range(height):
+        for x in range(width):
+            if input_image[y, x] >= threshold[y, x]:
+                output_image[y, x] = max_value
+            else:
+                output_image[y, x] = 0
+    return output_image
+
+
+# The overall Adaptive thresholding
+def adaptiveThresholding(input_image, 
+        max_value, adaptive_method, 
+                threshold_type, filter_size,
+                 C, Gaussian_sigma=1.4):
+    if adaptive_method == "Gaussian":
+        filter = GaussinFilter(sigma=Gaussian_sigma,
+                         size=filter_size)
+
+    wa_image = averagingFilter(input_image=input_image, input_filter=filter, filter_size=filter_size)
+
+
+    if threshold_type == "THRESH_BINARY":
+        t_image = calculateThreshold(input_image=wa_image, C=C)
+
+    threshold_image = threshold(input_image=input_image, max_value=max_value, threshold=t_image)
+
+    output_image = np.array(threshold_image, dtype='uint8')
+
+    return output_image
+
+
+
+image = readimg("Doc.tiff")
+output_image = adaptiveThresholding(
+        input_image=image, 
+        max_value=255, 
+        adaptive_method="Gaussian",         
+        threshold_type="THRESH_BINARY", 
+        filter_size=9, 
+        C = 4.5, 
+        Gaussian_sigma=2)
+cv2.imwrite('output.png', output_image)
 \end{lstlisting}
 
-        \begin{enumerate}
-                \item Write a program to read the grayscales of the image.
-\begin{lstlisting}
-def read_grayscales(img):
-        img = cv2.imread(img,0)
-        return img
-img_name = 'HawkesBay.jpeg'
-img = read_grayscales(img_name)
-\end{lstlisting}
-                \item Write a program to calculate the histogram of the image and display the histogram chart.
-\begin{lstlisting}
-def calculate_histogram(img, L):
-    image_flatten = img.flatten()
-    new_list = np.zeros(L)
-    for each_pixel in image_flatten:
-        new_list[each_pixel] += 1
-    return new_list 
-        
-def histogram_show(hist):
-    plt.bar(range(len(hist)), hist)
-    plt.xlabel("rk")
-    plt.ylabel("nk")
-    plt.title("Histogram of imput image")
-    plt.savefig("Histogram_input")
+\item In this question, we choose the Gaussian filter as the coefficient when calculateng the weighted average. The reason is that, Mean filter is good at reducing random noise, but in our image, we want to split the foreground and background. And Gaussian filter can achieve a better result compared with Mean filter when dealing with the problem of spliting two different frequencies.
 
-histogram_statis = calculate_histogram(img, 256)
-histogram_show(histogram_statis)
-\end{lstlisting}
-                The histogram is presented in Fig.\ref{q5_hist_input}.
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/Histogram_input.png}
-                \caption{Histogram of input image}
-                \label{q5_hist_input}
-                \end{figure}
-        
+Also, The filter\_size we choose is 11, since the letter in image are around 11 pixels for each of them. and the Gaussian\_sigma = 3. Usualy, a higher gussian sigma will get a gaussian filter that can bring more neighborhood inforamtion to the center.
 
-                \item Compare the calculated histogram obtained by using your own program with the one using the imhist function in MATLAB.
-\begin{lstlisting}
-img = imread("HawkesBay.jpeg")
-imhist(img,256)
-\end{lstlisting}
-                The histogram from Matlab imhist function is present as Fig.~\ref{q5_hist_matlab}
-                \begin{figure}[H]
-                \centering
-                \includegraphics[]{Figure/hist_matlab.png}
-                \caption{Histogram of Matlab imhist function}
-                \label{q5_hist_matlab}
-                \end{figure}
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{Figure/output.png}
+        \caption{The output image of Python implement}
+        \label{Q3_1}
+\end{figure}
 
-                \item Write a program to do histogram equalization on this image.
-\begin{lstlisting}
-def calculate_prob(hist,total_pixels):
-    return [values_each_bin/total_pixels for values_each_bin in hist]
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{Figure/cv2_output.png}
+        \caption{The output image from open cv2.adaptiveThreshold}
+        \label{Q3_2}
+\end{figure}
 
-def calculate_sk(cal_pr, L):
-    new_list = np.zeros(L)
-    for index, each_pr in enumerate(cal_pr):
-        cal_result = (L-1) * sum(cal_pr[0: index+1])
-        new_list[index] = round(cal_result)
-    return new_list
+\begin{figure}[H]
+        \centering
+        \includegraphics[]{Figure/A2mo.png}
+        \caption{The output image from Matlab adaptthresh}
+        \label{Q3_3}
+\end{figure}
 
-def new_image(img, sk):
-    height, width = img.shape
-    new_img = np.zeros(img.shape, dtype = 'uint8')
-    for i in range(img.shape[0]):
-        for j in range(img.shape[1]):
-            new_img[i, j] = sk[img[i,j]]
-    return new_img
-tp = img.shape[0]*img.shape[1]
-pr = calculate_prob(histogram_statis, tp)
-sk = calculate_sk(pr, 256)
-new_img = new_image(img, sk)
-\end{lstlisting}
+The Fig.~\ref{Q3_1} is the output by using the code above. And the Fig.~\ref{Q3_2} is the output from the method which is provided by OpenCV cv2.adaptiveThreshold() and we use the same parameters as we used in the implemented code. The Fig.~\ref{Q3_3} is the output image from the Matlab adaptthresh() with the same parameters. All of these three function can separate the input image from the dark backgroud. The implemented code and the function from openCV can achieve a slightly better result may because there are more parameters that could be modified such as the sigma of gaussian. 
 
-                \item Compare the histogram-equalized image obtained by using your own program with the one by using histeq function in MATLAB.
-\begin{lstlisting}
-J = histeq(I,256)
-imshow(J)
-\end{lstlisting}
-                The new image from matlet histeq function is presented in Fig.~\ref{q5_matlab_newimage}
-                \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.8\textwidth,height=0.5\textwidth]{Figure/he_matlab_newimage.png}
-                \caption{Histogram-equalized image obtained by Matlab histeq}
-                \label{q5_matlab_newimage}
-                \end{figure}
-\begin{lstlisting}
-cv2.imwrite("he_newimage.png",new_img)
-\end{lstlisting}
-                The new image from the histogram equalization problem is shown in Fig.~\ref{q5_python_newimage}
-                \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.8\textwidth,height=0.5\textwidth]{Figure/he_newimage.png}
-                \caption{"histogram-equalized image obtained by my own program"}
-                \label{q5_python_newimage}
-                \end{figure}
-                This two histogram-equalized images are very similar. 
+\end{enumerate}
 
-                
-        \end{enumerate}
+
+
 \end{enumerate}
 
 \end{document}

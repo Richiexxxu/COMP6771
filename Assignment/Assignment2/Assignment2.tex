@@ -329,9 +329,9 @@ output_image = adaptiveThresholding(
         max_value=255, 
         adaptive_method="Gaussian",         
         threshold_type="THRESH_BINARY", 
-        filter_size=9, 
+        filter_size=11, 
         C = 4.5, 
-        Gaussian_sigma=2)
+        Gaussian_sigma=3)
 cv2.imwrite('output.png', output_image)
 \end{lstlisting}
 

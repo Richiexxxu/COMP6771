@@ -1,5 +1,7 @@
 # Chapter 4
 
+
+
 ## Section 4.1
  - computational advantages of filtering in the frequency versus the spatial doman:
    - Square images and kernals, of sizes $M \times M$ and $m \times m$, respectively. 

@@ -45,11 +45,11 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
 
 ![image8](../Note/images/Fourier_image_8.png "image8")
 
-- 注意到，相位谱中的相位除了0，就是 $\pi$。因为 $\cos(t+\pi)=-\cos(t)$，所以实际上相位为 $\Pi$ 的波只是上下翻转了而已。对于周期方波的傅里叶级数，这样的相位谱已经是很简单的了。另外值得注意的是，由于 $\cos(t+2\pi)=\cos(t)$，所以相位差是周期的，$\pi$ 和 $3\pi$，$5\pi$，$7\pi$ 都是相同的相位。人为定义相位谱的值域为 $(-\pi，\pi]$，所以图中的相位差均为 $\Pi$。
+- 注意到，相位谱中的相位除了0，就是 $\pi$。因为 $\cos(t+\pi)=-\cos(t)$，所以实际上相位为 $\pi$ 的波只是上下翻转了而已。对于周期方波的傅里叶级数，这样的相位谱已经是很简单的了。另外值得注意的是，由于 $\cos(t+2\pi)=\cos(t)$，所以相位差是周期的，$\pi$ 和 $3\pi$，$5\pi$，$7\pi$ 都是相同的相位。人为定义相位谱的值域为 $(-\pi，\pi]$，所以图中的相位差均为 $\pi$。
 
 
 ## 4. Fourier Transformation
-- 傅里叶级数，在时域是一个周期且连续的函数，而在频域是一个非周期离散的函数。其中，周期函数$f(t)$可由三角函数的线性组合来表示，周期函数中周期为T，角频率为w， 频率为f。 
+- 傅里叶级数，在时域是一个周期且连续的函数，而在频域是一个非周期离散的函数。其中，周期函数 $f(t)$ 可由三角函数的线性组合来表示，周期函数中周期为T，角频率为w， 频率为f。 
 - 傅里叶变化是将一个时域非周期的连续信号，转换为一个在频域非周期的连续信号。而非周期信号可以堪称周期为无穷大的周期信号。 对非周期信号的傅里叶分析方法叫做傅里叶变换。
 
 ![image9](../Note/images/Fourier_image_9.png "image9")
@@ -80,11 +80,7 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
  - 三角函数系： 集合
     - $$\{0(sin0x), 1(cos0x), sinx, cosx, sin2x, cos2x,..., sin(nx), cos(nx)...\}, n = 0, 1, 2, 3...$$
   - Orthogonality:
-    $$
-    \int_{-\pi}^{\pi} \sin nx \cos mx dx = 0, n \neq m
-    $$
-    $$
-    \int_{-\pi}^{\pi} \cos nx \cos mx dx = 0, n \neq m
-    $$
+    $$\int_{-\pi}^{\pi} \sin nx \cos mx dx = 0, n \neq m$$
+    $$\int_{-\pi}^{\pi} \cos nx \cos mx dx = 0, n \neq m$$
     如果两个向量正交，则
    - 如果

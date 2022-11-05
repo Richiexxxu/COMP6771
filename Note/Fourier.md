@@ -13,7 +13,7 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
 ## 2. Fourier Series 的频谱
 ![image1](../Note/images/Fourier_image_1.png "image1")
 -  左上中有一个正弦波 $\cos (x)$
--  右上中由两个正弦波叠加 $\cos (x) + a. \cos (3x)$
+-  右上中由两个正弦波叠加 $\cos (x) + A. \cos (3x)$
 -  左下由四个正弦波叠加
 -  右下由10个正弦波叠加
 - 随着正弦波数量逐渐的增长，他们最终会叠加成一个标准的矩形，随着叠加的递增，所有正弦波中上升的部分逐渐让原本缓慢增加的曲线不断变陡，而所有正弦波中下降的部分又抵消了上升到最高处时继续上升的部分使其变为水平线。一个矩形就这么叠加而成了。
@@ -37,7 +37,7 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
 
 ![image7](../Note/images/Fourier_image_7.png "image7")
 
-- 这里需要纠正一个概念：时间差并不是相位差。如果将全部周期看作$2\pi$或者360度的话，相位差则是时间差在一个周期中所占的比例。我们将时间差除周期再乘$2\pi$，就得到了相位差。
+- 这里需要纠正一个概念：时间差并不是相位差。如果将全部周期看作2$\pi$或者360度的话，相位差则是时间差在一个周期中所占的比例。我们将时间差除周期再乘$2\pi$，就得到了相位差。
 - 在完整的立体图中，我们将投影得到的时间差依次除以所在频率的周期，就得到了最下面的相位谱。所以，频谱是从侧面看，相位谱是从下面看。
 
 ![image8](../Note/images/Fourier_image_8.png "image8")
@@ -60,7 +60,7 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
 
 ## 5. 欧拉公式
 
-![image12](../Note/images/Fourier_image-12.png "image12")
+![image12](../Note/images/Fourier_image_12.png "image12")
 
 - 根据上图，我们得知 +实数 * i = 虚数 --> +实数 * $i^2$ --> 
 

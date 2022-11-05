@@ -83,7 +83,42 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
       $$e^{-it} = con(t) - i*\sin(t)$$
       将两个式子相加再除2.
       $$\cos(t) = \frac{e^{it} + e^{-it}}{2}$$
-    - 理解： $e^{it}$ 可以理解为一条逆时针旋转的螺旋线，那么 $e^{-it}$ 则可以理解为一条顺时针旋转的螺旋线，而 $\cox(t)$ 则是这两条旋转方向不同的螺旋线叠加的一半，因为这两条螺旋线的虚数部分抵消掉了。这里，逆时针旋转的我们称为正频率，而顺时针旋转的我们称为负频率
+    - 理解： $e^{it}$ 可以理解为一条逆时针旋转的螺旋线，那么 $e^{-it}$ 则可以理解为一条顺时针旋转的螺旋线，而 $\cos(t)$ 则是这两条旋转方向不同的螺旋线叠加的一半，因为这两条螺旋线的虚数部分抵消掉了。这里，逆时针旋转的我们称为正频率，而顺时针旋转的我们称为负频率
+
+
+
+
+# 傅里叶分析推导
+![i1](../Note/images/Fourier%20Analysis-01.jpg "i1")
+
+![i2](../Note/images/Fourier%20Analysis-02.jpg "i2")
+
+![i3](../Note/images/Fourier%20Analysis-03.jpg "i3")
+
+![i4](../Note/images/Fourier%20Analysis-04.jpg "i4")
+
+![i5](../Note/images/Fourier%20Analysis-05.jpg "i5")
+
+![i6](../Note/images/Fourier%20Analysis-06.jpg "i6")
+
+![i7](../Note/images/Fourier%20Analysis-07.jpg "i7")
+
+![i8](../Note/images/Fourier%20Analysis-08.jpg "i8")
+
+![i9](../Note/images/Fourier%20Analysis-09.jpg "i9")
+
+![i10](../Note/images/Fourier%20Analysis-10.jpg "i10")
+
+![i11](../Note/images/Fourier%20Analysis-11.jpg "i11")
+
+![i12](../Note/images/Fourier%20Analysis-12.jpg "i12")
+
+![i13](../Note/images/Fourier%20Analysis-13.jpg "i13")
+
+![i14](../Note/images/Fourier%20Analysis-14.jpg "i14")
+
+
+
 
 
 

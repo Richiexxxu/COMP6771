@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 理解傅里叶
 
 ## Some definition of $\sin$ and $\cos$
@@ -25,13 +24,11 @@
 
 ![image5](../Note/images/Fourier_image_5.png "image5")
 
+## 3. 傅里叶级数的相位谱
 
 
 
 # The Discrete Fourier Tansform (DFT)
-=======
-# Fourier 
->>>>>>> 6e844cb153c56a9ab7aea8b2f5f6e7748c49b2ca
 
 ## Part 1 三角函数的正交性
 

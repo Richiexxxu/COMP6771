@@ -65,7 +65,8 @@ This content comes from： https://zhuanlan.zhihu.com/p/19763358
 
 ![image12](../Note/images/Fourier_image_12.png "image12")
 
-- 根据上图，我们得知 +实数 * i = 虚数 --> +实数 * $i^2$ --> 
+- 根据上图，我们得知 正实数 * i = 虚数 --> 正实数 * $i^2$ --> 负实数。
+- $$e^{ix} = \cosx + i\sinx$$ 
 
 
 

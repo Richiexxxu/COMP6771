@@ -2,6 +2,9 @@
 
 This content comes from： https://zhuanlan.zhihu.com/p/19763358
 
+
+$\pi$
+
 ## Some definition of $\sin$ and $\cos$
 - 正弦波是一个圆周运动在一条直线上的投影。所以频域的基本单元也可以理解为一个始终在旋转的圆。
 ![image3](../Note/images/Fourier_image_3.png "image3")

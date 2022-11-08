@@ -33,3 +33,11 @@
 - Abrupt, local changes in intensity can be detected using derivatives.
 - Finite defferences.
 - First derivative requirement: 
+  - must be zero in areas of constant intensity
+  - mst be nonzero at the onset of an intensity step or ramp
+  - must be nonzero at points along an intensity ramp
+- Second derivative
+  - Must be zero in areas of constant intensity
+  - Must be nonzero at the onset and end of an intensity step or ramp
+  - Must be zero along intensity ramps
+- 

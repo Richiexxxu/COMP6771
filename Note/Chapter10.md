@@ -29,3 +29,7 @@
 - A line may be viewed as a (typically) thin edge segment in which the intensity of the background on either side of the line is either much higher or much lower than the intensity of the line pixels. 
 - Isolated point : foreground (background) pixel surrounded by background(foreground) pixels.
 
+### 10.2.1 Background
+- Abrupt, local changes in intensity can be detected using derivatives.
+- Finite defferences.
+- First derivative requirement: 

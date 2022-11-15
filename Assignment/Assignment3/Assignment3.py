@@ -3,7 +3,7 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 def readImg(path = None):
     # print(path)
-    return cv.imread(path, 0)
+    return cv.imread(path)[:, :,0]
 
 def DFT2D(x, shift=True):
     '''

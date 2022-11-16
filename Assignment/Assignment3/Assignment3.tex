@@ -43,7 +43,7 @@
 \setlength{\droptitle}{-6em}
 
 % Enter the specific assignment number and topic of that assignment below, and replace "Your Name" with your actual name.
-\title{Assignment 2: Comp 6771 Image Processing}
+\title{Assignment 3: Comp 6771 Image Processing}
 \author{Yunqi Xu 40130514}
 \date{\today}
 
@@ -89,9 +89,10 @@
 
 \begin{enumerate}[leftmargin=\labelsep]
 % \vspace*{40em}
-\item Question 1
-    \begin{enumerate}
-        \item Based on the question, the mask is:
+\item Theoretical Question 1
+
+    
+    Based on the question, the mask is:
         \begin{equation}
             g(x, y) = \frac{1}{4}[f(x, y-1) + f(x, y+1) +f(x-1, y) +f(x+1, y)]  
             \label{q1_eq1}    
@@ -104,13 +105,13 @@
 
         Based on the Eq.~\ref{q1_eq2}, the Eq.~\ref{q1_eq1} can be calculated like:
         \begin{equation}
-        \begin{aligned}
-        f(x, y-1)
-        &= f(x - 0, y -(1))\\
-        &= f(u, v)e^-j2\pi(u(0)/M + v(1)/N)\\
-        &= F(u, v)e^{-j2\pi v/N}
-        \label{q1_eq3}
-        \end{aligned}
+            \begin{aligned}
+                f(x, y-1)
+                &= f(x - 0, y -(1))\\
+                &= F(u, v)e^{-j2\pi(u(0)/M + v(1)/N)}\\
+                &= F(u, v)e^{-j2\pi v/N}
+                \label{q1_eq3}
+            \end{aligned}
         \end{equation}
         
         \begin{equation}
@@ -118,14 +119,14 @@
                 f(x, y+1) 
                 &= f(x-0, y-(-1))\\
                 &= F(u, v)e^{-j2\pi (u(0)/M + v(-1)/N)}\\
-                &= F(u, v)e^{j2\pi u/M}
+                &= F(u, v)e^{j2\pi v/N}
             \label{q1_eq3}
             \end{aligned}
         \end{equation}
 
         \begin{equation}
             \begin{aligned}
-                f(x -1, y) 
+                f(x-1, y) 
                 &= f(x-(1), y-0)\\
                 &= F(u, v)e^{-j2\pi(u(1)/M + v(0)/N)}\\
                 &= F(u, v)e^{-j2\pi u/M}
@@ -135,21 +136,10 @@
 
         \begin{equation}
             \begin{aligned}
-                f(x -1, y) 
-                &= f(x-(1), y-0)\\
-                &= F(u, v)e^{-j2\pi(u(1)/M + v(0)/N)}\\
-                &= F(u, v)e^{-j2\pi u/M}
-            \label{q1_eq4}
-            \end{aligned}
-        \end{equation}
-
-
-        \begin{equation}
-            \begin{aligned}
-                f(x +1, y) 
+                f(x+1, y) 
                 &= f(x-(-1), y-0)\\
                 &= F(u, v)e^{-j2\pi(u(-1)/M + v(0)/N)}\\
-                &= F(u, v)e^{-j2\pi u/M}
+                &= F(u, v)e^{j2\pi u/M}
             \label{q1_eq5}
             \end{aligned}
         \end{equation}
@@ -157,27 +147,26 @@
         So, based on the Eq.~\ref{q1_eq2} ~\ref{q1_eq3} ~\ref{q1_eq4} ~\ref{q1_eq5}, 
 
         \begin{equation}
-            G(u, v) = \frac{1}{4} F(u, v) [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{j2\pi u/M} + e^{j2\pi u/M}]
+            G(u, v) = \frac{1}{4} F(u, v) [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{-j2\pi u/M} + e^{j2\pi u/M}]
         \end{equation}
 
         \begin{equation}
-            H(u, v) = \frac{1}{4} [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{j2\pi u/M} + e^{j2\pi u/M}]
+            H(u, v) = \frac{1}{4} [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{-j2\pi u/M} + e^{j2\pi u/M}]
         \end{equation}
 
-        Based on the Euler's Formula, $$\cos \theta = \frac{1}{2}(e^{i \theta} + e^{-i \theta})$$,
+        Based on the Euler's Formula, $\cos \theta = \frac{1}{2}(e^{i \theta} + e^{-i \theta})$,
 
         \begin{equation}
             \begin{aligned}
-                H(i, v)
-                &= \frac{1/4}F(u, v)[2\cos(\frac{2 \pi v}{N} + 2\cos(\frac{2\pi u}{M}))]\\
+                H(u, v)
+                &= \frac{1}{4}F(u, v)[2\cos(\frac{2 \pi v}{N} + 2\cos(\frac{2\pi u}{M}))]\\
                 &= \frac{1}{2}F(u, v)[\cos(\frac{2 \pi v}{N} + \cos(\frac{2\pi u}{M}))]
             \end{aligned}
         \end{equation}
 
-    \vspace*{1em}
-    \end{enumerate}
+    \vspace*{7em}
 
-\item Question 2
+\item Theoretical Question 2
 
 \begin{enumerate}
     \item  If an equation is linear, which means that:
@@ -193,7 +182,7 @@
         &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(af_1(x, y) + bf_2(x, y))\delta(x\cos\theta + y\sin\theta - \rho)dxdy\\
         &= a\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_1(x, y)\delta(x\cos\theta + y\sin\theta - \rho)dxdy + \\
         & b\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_2(x, y)\delta(x\cos\theta + y\sin\theta - \rho)dxdy\\
-        &= aO(f1(x, y)) + bO(f2(x, y))
+        &= aO(f_1(x, y)) + bO(f_2(x, y))
         % \label(q2_eq2)
         \end{aligned}
     \end{equation}
@@ -209,11 +198,19 @@
 
     \begin{equation}
         \begin{aligned}
+            x = u + x_0\\
+            y = v + y_0
+        \end{aligned}
+    \end{equation}
+
+    \begin{equation}
+        \begin{aligned}
             du = dx \\
             dv = dy
         \end{aligned}
     \end{equation}
 
+    So, 
     \begin{equation}
         \begin{aligned}
                 f(\rho, \theta)
@@ -295,15 +292,185 @@ The images are shown below:
     \label{Q3_4}
 \end{figure}
 
-Suppoer the Fig.~\ref{Q3_1} is $I_A$, so the Fig.~\ref{Q3_4} have a better result to reconstruct the Fig.~\ref{Q3_1} compared with Fig.~\ref{Q3_3}. On the other hand, the Fig.~\ref{Q3_3} reconstruct will for Fig.~\ref{Q3_2}. Because the phase of the Fourier of an image keep more information compared with magnitude of the image. So it is clearly to find that in Fig.~\ref{q3_3} the Jet keep more information, and in Fig.~\ref{q3_4} there are more information present the house.
+Suppose the Fig.~\ref{Q3_1} (House) is $I_A$, so the Fig.~\ref{Q3_4}(Magnitude of Jet with Phase of House) is the better construction.
+On the other hand, suppose the Fig.~\ref{Q3_2} (Jet) is $I_A$, then the Fig.~\ref{Q3_3}(Magnitude of House with Phase of Jet) is the better construction.
+The Fig.~\ref{Q3_3} and Fig.~\ref{Q3_4} indicates that for reconstruction, the phase of an image usually contains more edge and strcture information. So the Fig.~\ref{Q3_3} has a jet, and Fig.~\ref{Q3_4} has a house.
 
 \end{enumerate}
 
 
-\item Programming q2
+\item Programming Q2
 \begin{enumerate}
-    \iten the code is shown below
+    \item The code is shown below
+    \begin{lstlisting}
+def readImg(path):
+return cv.imread(path, 0)
+
+def gaussianBlur(img = None, kernal_size = None, sigma = None):
+    return cv.GaussianBlur(img, (kernal_size, kernal_size), sigma)
+
+def laplacian(img = None, kernal_size = None):
+    return cv.Laplacian(img, cv.CV_16S, ksize = kernal_size)
+
+def zero_cross(input_image = None, threshold = None):
+    zero_cross = np.zeros_like(input_image, dtype=np.uint8)
+    image_height, image_width = input_image.shape
+    for y in range(1, image_height - 1):
+        for x in range(1, image_width - 1):
+            if input_image[y][x] == 0:
+                if input_image[y][x - 1] * input_image[y][x + 1] < 0:
+                    if np.abs(input_image[y][x - 1] - input_image[y][x + 1]) / 2 > threshold:
+                        zero_cross[y][x] = 255
+
+                if input_image[y - 1][x] * input_image[y + 1][x] < 0:
+                    if np.abs(input_image[y - 1][x] - input_image[y + 1][x]) / 2 > threshold:
+                        zero_cross[y][x] = 255
+
+                if input_image[y - 1][x - 1] * input_image[y + 1][x + 1] < 0:
+                    if np.abs(input_image[y - 1][x - 1] - input_image[y + 1][x + 1]) / 2 > threshold:
+                        zero_cross[y][x] = 255
+
+                if input_image[y - 1][x + 1] * input_image[y + 1][x - 1] < 0:
+                    if np.abs(input_image[y - 1][x + 1] - input_image[y + 1][x - 1]) / 2 > threshold:
+                        zero_cross[y][x] = 255
+            if input_image[y][x] < 0:
+                if (input_image[y][x - 1] > 0) or (input_image[y][x + 1] > 0) or \
+                        (input_image[y - 1][x] > 0) or (input_image[y + 1][x] > 0) or \
+                        (input_image[y - 1][x - 1] > 0) or (input_image[y + 1][x + 1] > 0) or \
+                        (input_image[y - 1][x + 1] > 0) or (input_image[y + 1][x - 1] > 0):
+                    if np.abs(input_image[y][x - 1] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y][x + 1] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y - 1][x] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y + 1][x] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y - 1][x - 1] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y + 1][x - 1] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y - 1][x + 1] - input_image[y][x]) > threshold or \
+                            np.abs(input_image[y + 1][x + 1] - input_image[y][x]) > threshold:
+                        zero_cross[y][x] = 255
+    return zero_cross
+
+def round_up_to_odd(f):
+    return int(np.ceil(f) // 2 * 2 + 1)
+
+
+def marrHildreth():
+    # read image
+    img = readImg("house.tif")
+    # Gaussian blur
+
+    gaussian_sigma = 3.7
+    gaussian_kernal_size = round_up_to_odd(gaussian_sigma * 6)
+    print(gaussian_kernal_size)
+    img_gaussian = gaussianBlur(img=img,kernal_size=gaussian_kernal_size, sigma=gaussian_sigma)
+    cv.imshow("gaussianblur", img_gaussian)
+
+    # laplacian
+    log_size= 9
+    img_log = laplacian(img = img_gaussian, kernal_size= log_size)
+    # zero crossing
+    threshold = np.max(img_log) * 0.25
+    img_zerocross = zero_cross(input_image=img_log, threshold=threshold)
+
+    cv.imshow("marrHildreth", img_zerocross)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+    marrHildreth()
+
+    def canny():
+    # read image
+    img = readImg("house.tif")
+
+    # Gauss blur
+    gaussian_sigma = 1.5
+    gaussian_kernal_size = round_up_to_odd(gaussian_sigma * 6)
+    print(gaussian_kernal_size)
+    img_gaussian = gaussianBlur(img=img,kernal_size=gaussian_kernal_size, sigma=gaussian_sigma)
+
+    # Canny
+    img_min = np.min(img_gaussian)
+    img_max = np.max(img_gaussian)
+    print((img_min, img_max))
+    max_threshold = img_max * 0.6
+    min_threshold = img_max * 0.2
+    print((min_threshold, max_threshold))
+    img_can = cv.Canny(img_gaussian, min_threshold, max_threshold)
+
+    cv.imshow("canny", img_can)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+    canny()
+    \end{lstlisting}
+     The code above indicates the details of implement the Marr-Hildreth and Canny edge detector.
+    \begin{enumerate}
+        \item In the implement of Marr-Hildreth, first, read the image into gray image, then use Gaussian Blur to blur the image for reducing noises, then use the Laplacian to find edges, finally use zero-crossing method to find more precise edges.
+        \item In the Canny, first, read the image into gray image, then use Gaussian Blur to blur the image, reduce some noise, then use the Canny to filter the image. Also, the step inside Canny algorithm includes use Sobel operator find the magnitude and direction of edges, relate edge directions, non-maxmum suppression, and the detect edges and link edges.
+    \end{enumerate}
+    
+    \item The edge linking in Canny algorithm includes, first give two threshold, a minimum one and maximum one. 
+          After non-maxmum suppression, if the value of a pixel greater than the maximum threahold, this point will be treated as strong edge.
+          On the other hand, if the value of a pixel smaller than the minimum threshold, this point is non-edge.
+          Also, if the value of a pixel in the middle of the two threshold, this point will is weak edge. Then use 8-connectivity to detect whether this point belongs to a edge or not. 
+          If this point connected with strong point, then it is belongs to edge otherwise not a point of edge.
+
+          The edge linking step is not part of the step in Marr-Hildreth algorithm, cause Marr-Hildreth use zero-crossing method that based on the result of the Laplacian to find the edge. 
+          In the code, the function zero\_cross() shows the details of zero-crossing method in Marr-Hildreth.
+          Compared with the edge linking in Canny algorithm, the zero crossing in Marr-Hildreth will find those pixels which cross zero by detecting signs of its 8 neighbors and meanwhile checking the threshold between its neighbors for precise edges. 
+
+    \item The parameters includes:
+    \begin{enumerate}
+        \item Marr-hildreth edge detector
+            
+        During the Gaussian blur process, we want gaussian blur small noises but keep more information of edges. In the image, the texture on the wall are some detail information need to be blured. 
+        so we set $gaussian\_sigma = 3.7$ and the $gaussian\_size = max odd(6 * gaussian\_sigma) = 23$.  
+        This parameters of Gaussian blur can fit the patterns in image, blur more small patterns and keep more inforamtion of edges.
+
+        In the Laplacian filter process, we set $kernel\_size = 9$ in our experiment, this kernel size can fit the patterns of edges and give a good result for furthe step.
+
+        During the zero crossing process, we set $threshold = max(laplacion\_result) * 0.25$ in our experiment. 
+        Using this threshold, we can keep the most information of edges and remove as much non-edge information as we can.
+
+        \item Canny edge detector
         
+        Since the canny edge detector, since canny edge detector utilize non-maximum supression and edge linking to delete noise part. 
+        So, during the Gaussian blur process, we set $gaussian\_sigma = 1.5$ and the $gaussian\_size = max odd(6 * gaussian\_sigma) = 9$ in our experiment. 
+        This parameters can provide us a more clear information of edges.
+
+        During the edge linking process, we set $max\_threshold = max value(img) * 0.6$ and $min\_threshold = max value(img) * 0.2$ in our experiment, and the $max\_threshold = 50$ and the $min\_threshold = 150$ during our calculate. 
+        Also, the $max\_threshold / $min\_thresold$ = 150/50 = 3/1$ also following the rules for setting threshold.        
+            
+    \end{enumerate}
+    
+
+
+    \item 
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth,height=0.5\textwidth]{Figure/marrHildreth.png}
+            \caption{The Marr-Hildreth result}
+            \label{Q4_1}
+        \end{figure}
+        
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\textwidth,height=0.5\textwidth]{Figure/Canny.png}
+            \caption{The Canny result}
+            \label{Q4_2}
+        \end{figure}
+
+        The Fig.~\ref{Q4_1} and Fig.~\ref{Q4_2} present the result of these two edge detection algorithms. 
+        Both of this two algorithm can detect the main edge.
+        However, the edges in Fig.~\ref{Q4_2}(Canny edge detection) is better compared with the edges in Fig.~\ref{Q4_1}(Marr-Hildreth edge detection). 
+
+        In Fig.~\ref{Q4_1}, there are some small noises which can not be removed since the restriction of the algorithm. 
+        Since the threshold decide which pixels can be keeped can which pixels should be removed during the zero crossing process.
+        This method may keep some pixels actually is noise but the intensity change are dramatical, even remove some pixels that actually belong to the edge.
+
+        On the other hand, Canny algorithm can remains the correct edge information and remove those noises part in the image. Since the Non-maximum supression can delete many noise, and then the edge linking step further delete those pixels which are not edge points.
+        
+
 \end{enumerate}
 
 \end{enumerate}

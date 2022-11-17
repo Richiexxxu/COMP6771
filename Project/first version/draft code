@@ -1,0 +1,15 @@
+blank = np.stack((b,g,r),axis=2)
+blank = np.zeros((675,1200,3)).astype(np.int8)
+#print(blank.shape)
+# for i in range(0,675):
+#     for j in range(0,1200):
+#         pass
+
+#blank=blank.astype(np.int8)
+
+# Save the output.
+#cv2.imshow('original',blank)
+# cv2.imshow('b',b)
+# cv2.imshow('g',g)
+#zeros = np.zeros(img.shape[:2],dtype="uint8")
+#blank = cv2.merge([b,g,r])

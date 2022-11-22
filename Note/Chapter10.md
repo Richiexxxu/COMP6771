@@ -41,3 +41,50 @@
   - Must be nonzero at the onset and end of an intensity step or ramp
   - Must be zero along intensity ramps
 - 
+
+
+### 10.3 Thresholding
+- Image thresholding enjoys a central position in applications of image segmentation.
+
+#### 10.3.1 Foundation
+##### The basic of Internsity thresholding
+- Suppose image $f(x, y)$ composed of light objects on a dark background, then object and background pixels have intensity balues grouped into two dominant modes.
+  - $$ g(x, y)= \begin{cases}1 & if&f(x, y) > T\\0 &if &f(x, y) \leq T \end{cases}$$
+    - The process given in this equation is refered to as gloval thresholding.
+    - When the value of T changes over an image, is variable thresholding.
+      - "local thresholding" and "regional threshoding" also denote variable thresholding in which the value of $T$ at any point $(x, y)$ in an image depends on properties of a neighbord of $(x, y)$.
+  - $$ g(x, y) = \begin{cases}a & if&f(x, y) \gt T_2\\b &if&T_1 \lt f(x, y) \leq T_2\\ c & if&f(x,y) \leq T_1 \end{cases}$$
+    - Where $a$, $b$ and $c$ are any three distinct intensity values.
+  - The key factors affecting the properties of the valley(s)(the valley(s) separating the histogram modes):
+    - the separation between peaks(the further apart the peaks are, the better the chances of separating the modes)
+    - the noise content in the image(the modes broaden as noise increases)
+    - the relative sises of objects and background
+    - the uniformity of the illumination source
+    - the uniformity of the reflectance properties of the image.
+
+##### the Role of Noise in Image Thresholding
+- depends the "spike" modes that the histogram model contains.
+  
+##### The role of illumination and Reflectance in Image Thresholding
+- Three basic approaches to the problem:
+  - Correct the shading pattern directly.
+  - Correct the gloval shading pattern via processing using.
+  - "work around" nonuniformities using variable thresholidng.
+
+##### Basic Global Thresholding
+- Algorithm of estimating the thresholding value steps:
+  - 1. Select an initial estimate for the global threshold $T$.
+  - 2. Segment the image using $T$ in the Equation above. Thie will produce two groups of pixels: $G_1$, consisting of pixels with intensity values $\gt T$; the $G_2$, consisting of pixels with values $\leq T$.
+  - 3. Compute the average (mean) intensity values $m_1$ and $m_2$ for the pixels in $G_1$ and $G_2$, respectively.   
+  - 4. Compute a new threshold value midway between $M_1$ and $m_2$:
+        $$T = \frac{1}{2}(m_1 + m_2)$$
+  - 5. Repeat Setps 2 through 4 until the difference between values of $T$ in successive interations is smaller than a predefined value, $\Delta T$.
+   
+
+##### Optimum Gloval Thresholding using OTSU'S Method
+
+- A statistical-decision theory problem whose objective is to minimize the average error incurred in assigning pixels to two or more groups(classes).
+- Otsu's method:
+  - The method is optimum in the sense that it maximizes the between-class variance, a measure used in statistical discriminant analysis. 
+    - properly thresholded classed should be distinct with respect to the intensity values of their pixels and, conversely, that a threshold giving the best reparation between classes in terms of their intensity values would be the best(optimum) threshold.
+    - 

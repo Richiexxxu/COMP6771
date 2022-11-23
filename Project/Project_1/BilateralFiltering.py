@@ -16,7 +16,7 @@ def domainFilter(kernel_size, sigma = 1):
 
     for i in range(kernel_size):
         for j in range(kernel_size):
-            xi = np.array([i, j])
+            xi = np.array([i, j]              )
             distance = np.linalg.norm(xi - center_point)
             kernel[i, j] = np.exp(-1/2 * (distance / sigma) ** 2)
     # kernel = kernel / np.sum(kernel)

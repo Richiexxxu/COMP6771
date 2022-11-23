@@ -18,7 +18,7 @@
 ## 2. The Idea
 
 - Define A low-pass domain filter applied to image $f(x)$:
-  - $$ h(x) = k_{d}^{-1}(x) \iint f(\xi)c(\xi, x) d\xi \tag{2.1}$$
+  - $$h(x) = k_{d}^{-1}(x) \iint f(\xi)c(\xi, x) d\xi \tag{2.1}$$
     - $c(\xi, x)$ measures the geometric closeness between the neighborhood center $x$ and a nearyby point $\xi$. 
   - If low-pass filter is to preserve the dc component of low-pass signals, we obtain:
     - $$ k_{d}(x) = \iint c(\xi, x) d\xi \tag{2.2}$$

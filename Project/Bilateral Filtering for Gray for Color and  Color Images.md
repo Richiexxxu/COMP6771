@@ -41,13 +41,13 @@
 - shift-invariant Gaussian filtering: a simpel and important case of bilateral filtering, both the closeness function $c(\xi, x)$ and the similarity function $s(\phi, f)$ are Gaussian function of the Euclidean distance between their arguments.
   - Define $c$ : 
     - $$c(\xi, x) = e^{-\frac{1}{2}(\frac{d(\xi, x)}{\sigma_{d}})^2}$$
-      - where, $$d(\xi, x) = d(\xi - x) = ||\xi - x||$$ is the Euclidean distance between $\xi$ and $x$.
+      - where, $d(\xi, x) = d(\xi - x) = ||\xi - x||$ is the Euclidean distance between $\xi$ and $x$.
     - Geometric spread $\sigma_d$ in the domainis chosen based on the desired amount of low-pass filtering. 
       - large blurs more, combines values from more distant image locations.
 
   - Define $s$ : 
     - $$s(\xi, x) = e^{-\frac{1}{2}(\frac{\delta(f(\xi), f(x))}{\sigma_{r}})^{2}}$$
-      - where, $$\delta(\phi, f) = \delta(\phi - f) = ||\phi - f||$$ is a suitable measure of distance between the two intensity value $\phi$ and f.
+      - where, $\delta(\phi, f) = \delta(\phi - f) = ||\phi - f||$ is a suitable measure of distance between the two intensity value $\phi$ and f.
       - In the scalar case, this may be simply the absolute difference of the pixel difference or, since noise increases with image intensity, an intensity-dependent version of it.
       - Photometric spread $\sigma_r$ in the image range is set to achieve the desired amount of combination of pixel values. 
 ## 3. Range versus Bilateral Filtering

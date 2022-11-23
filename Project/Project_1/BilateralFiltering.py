@@ -19,7 +19,7 @@ def domainFilter(kernel_size, sigma = 1):
             xi = np.array([i, j])
             distance = np.linalg.norm(xi - center_point)
             kernel[i, j] = np.exp(-1/2 * (distance / sigma) ** 2)
-    kernel = kernel / np.sum(kernel)
+    # kernel = kernel / np.sum(kernel)
     return kernel
 
 
@@ -29,11 +29,14 @@ def rangefilter(img_pitch, x_intensity, kernel_size, sigma = 1):
     img_pitch = np.float64(img_pitch)
     # intensity_difference = img_pitch - img_pitch[kernel_size//2, kernel_size//1]
     # kernel = np.exp(-1/2 * (()/sigma) ^2)
-    for i in range(kernel_size):
-        for j in range(kernel_size):
-            intensity_difference = np.abs(img_pitch[i][j] - x_intensity)
-            kernel[i][j] = np.exp(-1/2* (intensity_difference/sigma) ** 2)
-    kernel = kernel/np.sum(kernel)
+    # for i in range(kernel_size):
+    #     for j in range(kernel_size):
+    #         intensity_difference = np.abs(img_pitch[i][j] - x_intensity)
+    #         kernel[i][j] = np.exp(-1/2* (intensity_difference/sigma) ** 2)
+
+    intensity_difference =
+
+    # kernel = kernel/np.sum(kernel)
     return kernel
 
 def paddingImg(img, kernel_size):
@@ -49,11 +52,6 @@ def paddingImg(img, kernel_size):
     padding_size = int((kernel_size - 1) / 2)
     padded_img[padding_size: padding_size + img_height, padding_size: padding_size + img_width] = img
     return padded_img
-
-
-
-
-
 
 def filterimage(img, kernel_size, domain_sigma, range_sigma):
     '''
@@ -72,11 +70,15 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
     padded_img = paddingImg(img=img,kernel_size = kernel_size)
     padded_size = int((kernel_size - 1) / 2)
 
+    # calculate the domain flter:
+    domain_kernel = domainFilter(kernel_size=kernel_size, sigma=domain_sigma)
+
+
     for y in range(img_height):
         for x in range(img_width):
 
-            if (y % 10 == 0) and (x % 10 == 0):
-                print(y, x)
+            # if (y % 10 == 0) and (x % 10 == 0):
+            #     print(y, x)
             # img_pitch = padded_img[0:5, 0:5]
 
             '''
@@ -91,7 +93,7 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
                                    center_x - padded_size : center_x + padded_size +1]
 
             # calculate domain kernel
-            domain_kernel = domainFilter(kernel_size=kernel_size, sigma=domain_sigma)
+            # domain_kernel = domainFilter(kernel_size=kernel_size, sigma=domain_sigma)
 
             # calculate range kernel
             range_kernel = rangefilter(img_pitch= img_pitch, x_intensity= img[y,x],kernel_size=kernel_size, sigma=range_sigma)
@@ -101,8 +103,6 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
             final_kernel = final_kernel / np.sum(final_kernel)
 
             img_bilateral[y,x] = np.sum(img_pitch * final_kernel)
-
-
     return img_bilateral
 
 

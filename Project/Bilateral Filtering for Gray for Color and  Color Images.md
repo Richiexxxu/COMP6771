@@ -32,7 +32,7 @@
           -  We say that the similarity function $s$ is unbiased if it depends only on the difference $f(\xi) - f(x)$.
  -  Bilateral filtering: Combine domain and range filtering, thereby enforcing both geometric and photometric locality.
     -  Combined filtering :
-       -  $$h(x) = k^{-1}(x) \iint f(\xi)c(\xi, x)s(f(\xi), f(x))d\xi \tag{2.5}$$
+       -  $$h(x) = k^{-1}(x) \iint f(\xi)c(\xi, x)s(f(\xi), f(x))d\xi$$
        - Normalization:
          - $$k(x) = \iint c(\xi, x) s(f(\xi), f(x))d\xi$$
        - It replaces the pixel value at $x$ with an average of similar and nearby pixel values.

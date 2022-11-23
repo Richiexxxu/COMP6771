@@ -21,18 +21,18 @@
   - $$h(x) = k_{d}^{-1}(x) \iint f(\xi)c(\xi, x) d\xi \tag{2.1}$$
     - $c(\xi, x)$ measures the geometric closeness between the neighborhood center $x$ and a nearyby point $\xi$. 
   - If low-pass filter is to preserve the dc component of low-pass signals, we obtain:
-    - $$ k_{d}(x) = \iint c(\xi, x) d\xi \tag{2.2}$$
+    - $$k_{d}(x) = \iint c(\xi, x) d\xi \tag{2.2}$$
   - If the filter is shift-invariant, $c(\xi, x)$ is only a function of the vector dfference $\xi -x$ and $k_{x}$ is constant.
 - Defined Range filtering:
   - $$h(x) = k_{x}^{-1}(x) \iint f(\xi)s(f(\xi), f(x)) d\xi \tag{2.3}$$
     - $s(f(\xi),f(x))$ measures the photometric similarity between the pixel at the neighborhood center $x$ and that of a nearby point $\xi$.
     -  The normalization constant $(2.2)$ is replaced by:
-       -  $$ k_{r}(x) = \iint s(f(\xi), f(x))d\xi \tag{2.4}$$
+       -  $$k_{r}(x) = \iint s(f(\xi), f(x))d\xi \tag{2.4}$$
           -  The normalization for the similarity function s depends on the image $f$.
           -  We say that the similarity function $s$ is unbiased if it depends only on the difference $f(\xi) - f(x)$.
  -  Bilateral filtering: Combine domain and range filtering, thereby enforcing both geometric and photometric locality.
     -  Combined filtering :
-       -  $$ h(x) = k^{-1}(x) \iint f(\xi)c(\xi, x)s(f(\xi), f(x))d\xi \tag{2.5}$$
+       -  $$h(x) = k^{-1}(x) \iint f(\xi)c(\xi, x)s(f(\xi), f(x))d\xi \tag{2.5}$$
        - Normalization:
          - $$k(x) = \iint c(\xi, x) s(f(\xi), f(x))d\xi$$
        - It replaces the pixel value at $x$ with an average of similar and nearby pixel values.

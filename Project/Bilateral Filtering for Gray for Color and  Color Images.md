@@ -54,3 +54,8 @@
 - Main point: Range filtering by itself merely modifies the gray map of the image it it applied to.
 
 ## 4. Experiments with black-and-White Images.
+
+## 5. Experiments with Color Images
+- For color images, edge-preserving smoothing could be applied to the red, green, and blue components of the image separatly. However, the intensity profiles across the edge in the three color  ands are in general different. 
+- A bilateral filter allows combining the three color bands appropriately, and measuring photometric distances between pixels in the combined space.
+- Usiing CIE-Lab space.

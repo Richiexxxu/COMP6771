@@ -11,16 +11,30 @@ def readimg(path, img_type = 0):
 # define the domain filter
 def domainFilter(kernel_size, sigma = 1):
 
-    kernel = np.zeros((kernel_size, kernel_size))
+    # kernel = np.zeros((kernel_size, kernel_size))
     center_point = np.array([kernel_size/2, kernel_size/2])
 
-    for i in range(kernel_size):
-        for j in range(kernel_size):
-            xi = np.array([i, j]              )
-            distance = np.linalg.norm(xi - center_point)
-            kernel[i, j] = np.exp(-1/2 * (distance / sigma) ** 2)
+    # for i in range(kernel_size):
+    #     for j in range(kernel_size):
+    #         xi = np.array([i, j])
+    #         distance = np.linalg.norm(xi - center_point)
+    #         kernel[i, j] = np.exp(-1/2 * (distance / sigma) ** 2)
+
+    # calculate (kernel_size - 1) /2
+    half_kernel_size = (kernel_size - 1) /2
+    center_x, center_y = int((kernel_size - 1) / 2), int((kernel_size - 1) / 2)
+    [x, y] = np.meshgrid(range(kernel_size), range(kernel_size))
+    distance = (center_x - x) **2 + (center_y - y) **2
+    kernel = np.exp(-1/2 * (distance/(sigma **2)))
+
+
+
     # kernel = kernel / np.sum(kernel)
     return kernel
+
+# kernel = domainFilter(kernel_size=5)
+# print(kernel)
+
 
 
 # define the range filter:
@@ -34,7 +48,8 @@ def rangefilter(img_pitch, x_intensity, kernel_size, sigma = 1):
     #         intensity_difference = np.abs(img_pitch[i][j] - x_intensity)
     #         kernel[i][j] = np.exp(-1/2* (intensity_difference/sigma) ** 2)
 
-    intensity_difference =
+    intensity_difference = np.abs(img_pitch - x_intensity)
+    kernel = np.exp(-1/2 * (intensity_difference / sigma) ** 2)
 
     # kernel = kernel/np.sum(kernel)
     return kernel
@@ -115,7 +130,7 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
 img = readimg(path="img_cat.png",img_type=0)
 print(img.shape)
 cv2.imshow("original", img)
-kernel_size = 25
+kernel_size = 35
 # pi = paddingImg(img, kernel_size=kernel_size)
 # print(pi)
 # print(pi[3,3])

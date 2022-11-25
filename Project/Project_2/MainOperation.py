@@ -27,7 +27,7 @@ def readColor(path, color_value = 1):
 2. transfer an three channels image into LAB format
 '''
 def cvtLAB(img):
-    return cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    return cv2.cvtColor(img.astype(np.uint8), cv2.COLOR_BGR2LAB)
 
 
 '''

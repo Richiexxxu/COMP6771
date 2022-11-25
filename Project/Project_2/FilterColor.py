@@ -82,11 +82,11 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
 
 img = mo.readColor(path="rubiks_cube.png", color_value=1)
 # cv2.imshow("test original", img)
-
+img = mo.normolization(img=img)
 img = mo.cvtLAB(img=img)
 print(img.shape)
 # cv2.imshow("test color",img)
-# img = mo.normolization(img=img)
+
 
 kernel_size = 15
 domain_sigma = 10
@@ -94,11 +94,11 @@ range_sigma = 100
 filtered_img = filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma)
 
 # filtered_img = mo.renormolization(img=filtered_img)
-# print((np.min(filtered_img), np.max(filtered_img)))
+print((np.min(filtered_img), np.max(filtered_img)))
 # print(filtered_img.shape)
 # cv2.imshow("filter_result", filtered_img)
-filtered_img = np.uint8(filtered_img)
+# filtered_img = np.uint8(filtered_img)
 result_img = mo.cvtBGR(filtered_img)
-cv2.imshow('converted result', result_img)
+cv2.imshow("converted result", result_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

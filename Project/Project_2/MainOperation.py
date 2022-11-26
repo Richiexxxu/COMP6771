@@ -27,15 +27,15 @@ def readColor(path, color_value = 1):
 2. transfer an three channels image into LAB format
 '''
 def cvtLAB(img):
-    return cv2.cvtColor(img.astype(np.uint8), cv2.COLOR_BGR2LAB)
-
+    # return cv2.cvtColor(img.astype(np.float32), cv2.COLOR_BGR2LAB)
+    return cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
 
 '''
 3. transfer the lab color space image into BGR image
 '''
 def cvtBGR(img):
+    # return cv2.cvtColor(img.astype(np.float32), cv2.COLOR_LAB2BGR)
     return cv2.cvtColor(img, cv2.COLOR_LAB2BGR)
-
 
 '''
 4. normolization to [0,1]

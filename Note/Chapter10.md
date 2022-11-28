@@ -40,6 +40,44 @@
   - Must be zero in areas of constant intensity
   - Must be nonzero at the onset and end of an intensity step or ramp
   - Must be zero along intensity ramps
+### 10.2.2 Detection of Isolated points 
+### 10.2.3 Line detection
+### 10.2.4 Edge models
+### 10.2.5 Basic Edge Detection
+#### The Image gradient and Its properties
+#### Gradient Operators
+#### Combining the Gradient with Thresholding
+
+### More Advanced Techniques for edge detection
+#### The Marr-Hildreth Edge Detector
+#### The Canny Edge Detector
+
+### 10.2.6 Linking Edge Points
+- Edge detection should yield sets of pixels lying only on edges.
+  - But seldom due to the noise, nonuniform illumination, discontinuities in intensity values.
+- Link algorithms: designed to assemble edge pixels into meaningful edges and/or region boundaries.
+  - edge points in a local region ( 3 x 3 neighborhood)
+  - global approach that works with an entire edge map
+
+#### Local Processing
+- Analyze the characteristics of pixels in a small neighborhood about every point $(x, y)$ that has been declared an edge point.
+- similar linked points, forming an edge of pixels that share common properties according to the specified criteria.
+- principle properties used for establishing similarity of edge pixels:
+  - (1) the strength(magnitude).
+  - (2)the direction of the gradient vector
+- Process:
+  - 1. compute the gradient magnitude and angle arrays, $M(x, y)$ and $\alpha (x, y)$, of the input image, $f(x, y)$.
+  - 2. Form a binary image, $g(x, y)$, whose value at any point $(x, y)$ is given by:
+    $$g(x,y)=
+      \begin{cases}
+      1, &if M(x, y) \gt T_M And \alpha(x, y) = A \pm T_A\\
+      0. &otherwise
+      \end{cases}$$
+  - 3. Scan the rows of $g$ and fill(set to 1) all gaps (sets of 0's) in each row that do not exceed a specified length, $L$.
+  - 4. To detect gaps in any other direction, $\thetha$, retate $g$ by this angle and apply the horizontal scanning procedue in step 3. Rorate the result back by $-\theta$.
+
+#### Global Processing Using the Hough Trasform
+- Hough Transform.
 - 
 
 
@@ -61,6 +99,7 @@
     - the relative sises of objects and background
     - the uniformity of the illumination source
     - the uniformity of the reflectance properties of the image.
+
 
 ##### the Role of Noise in Image Thresholding
 - depends the "spike" modes that the histogram model contains.

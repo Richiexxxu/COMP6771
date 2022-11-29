@@ -15,8 +15,6 @@ def domainFilter(kernel_size, sigma = 1):
 # define the range filter:
 def rangefilter(img_pitch, x_intensity, kernel_size, sigma = 1):
     kernel = np.zeros((kernel_size, kernel_size))
-    # img_pitch = np.float64(img_pitch)
-    # intensity_difference = np.abs(img_pitch - x_intensity)
     intensity_difference = (img_pitch - x_intensity) **2
     kernel = np.exp(-1/2 * (intensity_difference / sigma **2))
     return kernel
@@ -32,7 +30,6 @@ def paddingImg(img, kernel_size):
 
 def paddingReflect(img, kernel_size):
     # pre-processing:
-
     img_height, img_width= img.shape
     padded_img = np.zeros((img_height + kernel_size - 1, img_width + kernel_size - 1))
     padding_size = int((kernel_size - 1) / 2)
@@ -54,7 +51,6 @@ def paddingReflect(img, kernel_size):
     left_value = img[:, :padding_size]
     reversed_left_value = np.flip(left_value, axis = 1)
     padded_img[padding_size:padding_size+img_height, :padding_size] = reversed_left_value
-
 
     right_value = img[:, -padding_size:]
     reversed_right_value = np.flip(right_value, axis = 1)
@@ -83,15 +79,10 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
     img_height, img_width = original_size
     img_bilateral = np.zeros(original_size)
     print(img_bilateral.shape)
-    # img_bilateral = np.zeros((img_height, img_width))
-    # padded_img = paddingImg(img=img,kernel_size = kernel_size)
     padded_img = paddingReflect(img=img, kernel_size=kernel_size)
     padded_size = int((kernel_size - 1) / 2)
-    # padded_img = img
     # calculate the domain filter:
     domain_kernel = domainFilter(kernel_size=kernel_size, sigma=domain_sigma)
-    # for y in range(kernel_size - 1, img_height - kernel_size + 1):
-    #     for x in range(kernel_size - 1, img_width - kernel_size + 1):
     for y in range(img_height):
         for x in range(img_width):
             center_y = y + padded_size
@@ -100,7 +91,6 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
                                    center_x - padded_size : center_x + padded_size +1]
 
             range_kernel = rangefilter(img_pitch= img_pitch, x_intensity= img[y,x],kernel_size=kernel_size, sigma=range_sigma)
-            # range_kernel = rangefilter(img_pitch=img_pitch, x_intensity=img[center_y, center_x], kernel_size=kernel_size, sigma=range_sigma)
             # calculate final kernel
             final_kernel = domain_kernel * range_kernel
 
@@ -108,37 +98,58 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
     return img_bilateral
 
 
-
-
-
-
-
 sigmaColor = [10, 30, 100, 300]
-for sc in sigmaColor:
+sigmaSpace = [1, 3, 10]
+root_path = "original_paper_images/"
+image_name = "cat_part"
+py_saved_path = "output_image_python/"
+im_saved_path = "output_image/"
+# print(root_path+image_name+".png")
+for ss in sigmaSpace:
+    for sc in sigmaColor:
 
-    kernel_size= 35
-    img = mo.readGray(path="original_paper_images/cat_part.png", color_value=0)
-    cv2.imshow("first", img)
-    original_size = img.shape
-    print(img.shape)
-    print(img.shape)
-
-    # kernel_size = 7
-    domain_sigma = 10
-    range_sigma = sc
-    filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
-    print("filter", filtered_img.shape)
-    cv2.imshow(str(sc), filtered_img)
-    cv2.waitKey(0)
+        kernel_size= 35
+        domain_sigma = ss
+        range_sigma = sc
 
 
-cv2.destroyAllWindows()
+        # # cv2.imshow("first", img)
+
+        # # print(img.shape)
+        # # print(img.shape)
+
+        #------------------------------------------------------------
+        #use implement method
+        # img = mo.readGray(path=root_path+image_name+".png", color_value=0)
+        # original_size = img.shape
+        # filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+        # # print("filter", filtered_img.shape)
+        # # cv2.imshow(str(sc), filtered_img)
+        # # cv2.waitKey(0)
+        # image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+        # img_saved_path = im_saved_path + image_saved_name
+        # print(img_saved_path)
+        # cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+
+        #--------------------------------------------------
+        # directly output from opencv-python (compare)
+        py_img = cv2.imread(root_path+image_name+".png", 0)
+        filtered_img = cv2.bilateralFilter(py_img, d=kernel_size, sigmaSpace=domain_sigma, sigmaColor=range_sigma)
+        image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+        img_saved_path = py_saved_path + image_saved_name
+        print(img_saved_path)
+        cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+
+    
 
 
 
 
 
-
-
+#
+# img = cv2.imread("original_paper_images/snack.png")
+# cv2.imshow("test", img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 

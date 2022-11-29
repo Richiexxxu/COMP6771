@@ -12,6 +12,8 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{color}
+\usepackage{caption}
+\usepackage{subfigure}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -116,24 +118,116 @@ Firstly, we present our result compared with the result indicated in the paper, 
 
 \begin{figure}[htbp]
   \centering
-  \subfigure[pic1.]{
-  \includegraphics[width=5.5cm]{}
-  %\caption{fig1}
+  \subfigure[$\sigma_d=1, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs10.png}
+  % \caption{fig1}
   }
   \quad
-  \subfigure[pic2.]{
-  \includegraphics[width=5.5cm]{111.eps}
+  \subfigure[$\sigma_d=1, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs30.png}
   }
   \quad
-  \subfigure[pic3.]{
-  \includegraphics[width=5.5cm]{111.eps}
+  \subfigure[$\sigma_d=1, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs100.png}
   }
   \quad
-  \subfigure[pic4.]{
-  \includegraphics[width=5.5cm]{111.eps}
+  \subfigure[$\sigma_d=1, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs300.png}
   }
-  \caption{ pics}
+
+  \subfigure[$\sigma_d=3, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds3_rs10.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds3_rs30.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds3_rs100.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds3_rs300.png}
+  }
+
+  \subfigure[$\sigma_d=10, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds10_rs10.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds10_rs30.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds10_rs100.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds10_rs300.png}
+  }
+  \caption{A detail figure with bilateral filters with various range and domain parameter values by implement code}
   \end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \subfigure[$\sigma_d=1, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs10.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs30.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs100.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds1_rs300.png}
+  }
+
+  \subfigure[$\sigma_d=3, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds3_rs10.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds3_rs30.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds3_rs100.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=3, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds3_rs300.png}
+  }
+
+  \subfigure[$\sigma_d=10, \sigma_r=10$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds10_rs10.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=30$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds10_rs30.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=100$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds10_rs100.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=10, \sigma_r=300$]{
+  \includegraphics[width=3.5cm]{output_image_python/cat_part_ds10_rs300.png}
+  }
+  \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python}
+  \end{figure}
+
+The result indicates that our re-implement method of Bilateral filter can output the same grey result no matter compared with built-in opencv method or printed on paper.
 
 
 \subsection{Compare with other baseline algorithm}

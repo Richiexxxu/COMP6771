@@ -47,7 +47,7 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
     img_height, img_width, img_channel = img.shape
     img_bilateral = np.zeros((img_height, img_width, img_channel))
     # padded_img = paddingImg(img=img, kernel_size=kernel_size)
-    # padded_img = img
+    padded_img = img
     padded_size = int((kernel_size - 1) / 2)
 
 
@@ -81,14 +81,18 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
     return img_bilateral
 
 
-kernel_size = 15
-img = mo.readColor(path="rubiks_cube.png", color_value=1)
-
+kernel_size = 5
+img = mo.readColor(path="img_cat.png", color_value=1)
+print((np.max(img), np.min(img)))
+img = img[:30, :30, :]
+print(img.shape)
 oimg = np.uint8(paddingImg(img=img, kernel_size=kernel_size))
+print(oimg.shape)
 # cv2.imshow("test original", img)
 # img = mo.normolization(img=img)
 img = mo.cvtLAB(img=img)
 print(img.shape)
+
 # cv2.imshow("test color",img)
 
 

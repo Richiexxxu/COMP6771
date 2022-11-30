@@ -2,17 +2,20 @@ import numpy as np
 import cv2
 import MainOperation as mo
 
-img = cv2.imread("rubiks_cube.png", 1)
-img = mo.cvtLAB(img)
-# img = np.float32(img/255.0)
-reslt_img = cv2.bilateralFilter(img, d=15, sigmaSpace=10, sigmaColor=200)
-# reslt_img_a = cv2.bilateralFilter(img, d=25, sigmaSpace=10, sigmaColor=900)
-# cv2.imshow("original", img)
-reslt_img = mo.cvtBGR(reslt_img)
-cv2.imshow("result", reslt_img)
-# cv2.imshow("resut_a", reslt_img_a)
+kernel_size = 5
+# img = mo.readColor(path="rubiks_cube.png", color_value=1)[:10, :10, :]
+img = np.zeros((5, 5, 3))
+img = np.uint8(img)
+print((np.max(img), np.min(img)))
+# img = np.array(img)
+# print(img.shape)
+# oimg = np.uint8(paddingImg(img=img, kernel_size=kernel_size))
+# print(oimg.shape)
+img_new = mo.cvtLAB(img=img)
+# img_new = np.array(img_new)
+print(img_new.shape)
+print((np.max(img_new), np.min(img_new)))
 
 
+print((img == img_new).all())
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()

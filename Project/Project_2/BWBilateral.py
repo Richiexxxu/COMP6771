@@ -29,16 +29,18 @@ def paddingImg(img, kernel_size):
     padded_img[padding_size: padding_size + img_height, padding_size: padding_size + img_width] = img
     return padded_img
 
-def filterimage(img, kernel_size, domain_sigma, range_sigma):
+def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
     img_height, img_width = img.shape
-    img_bilateral = np.zeros((img_height, img_width))
-    padded_img = paddingImg(img=img,kernel_size = kernel_size)
+    img_bilateral = np.zeros(original_size)
+    print(img_bilateral.shape)
+    # img_bilateral = np.zeros((img_height, img_width))
+    # padded_img = paddingImg(img=img,kernel_size = kernel_size)
     padded_size = int((kernel_size - 1) / 2)
-
+    padded_img = img
     # calculate the domain filter:
     domain_kernel = domainFilter(kernel_size=kernel_size, sigma=domain_sigma)
-    for y in range(img_height):
-        for x in range(img_width):
+    for y in range(kernel_size - 1, img_height - kernel_size + 1):
+        for x in range(kernel_size - 1, img_width - kernel_size + 1):
             center_y = y + padded_size
             center_x = x + padded_size
             img_pitch = padded_img[center_y - padded_size : center_y + padded_size +1,
@@ -54,23 +56,30 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma):
     return img_bilateral
 
 
-
+kernel_size= 5
 img = mo.readGray(path="img_cat.png", color_value=0)
-cv2.imshow("test original", img)
-# img = mo.cvtLAB(img=img)
+cv2.imshow("first", img)
+original_size = img.shape
+# img = img[:10, :10]
 print(img.shape)
+img = paddingImg(img, kernel_size=kernel_size)
+print(img.shape)
+# cv2.imshow("test original", img)
+# img = mo.cvtLAB(img=img)
+# print(img.shape)
 # cv2.imshow("test color",img)
 # img = img / 255
 
 # img = mo.normolization(img=img)
-print((np.min(img), np.max(img)))
+# print((np.min(img), np.max(img)))
 
-kernel_size = 25
+# kernel_size = 7
 domain_sigma = 3
 range_sigma = 300
 # filtered_img = filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma)
 # filtered_img = np.uint8(mo.renormolization(filtered_img))
-filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma))
+filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+print("filter", filtered_img.shape)
 cv2.imshow("filter_result", filtered_img)
 
 

@@ -101,46 +101,81 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
 sigmaColor = [10, 30, 100, 300]
 sigmaSpace = [1, 3, 10]
 root_path = "original_paper_images/"
-image_name = "cat_part"
+image_name = "onion"
 py_saved_path = "output_image_python/"
 im_saved_path = "output_image/"
 # print(root_path+image_name+".png")
-for ss in sigmaSpace:
-    for sc in sigmaColor:
 
-        kernel_size= 35
-        domain_sigma = ss
-        range_sigma = sc
+# for ss in sigmaSpace:
+#     for sc in sigmaColor:
+#
+#         kernel_size= 21
+#         domain_sigma = ss
+#         range_sigma = sc
+#
+#
+#         # # cv2.imshow("first", img)
+#
+#         # # print(img.shape)
+#         # # print(img.shape)
+#
+#         #------------------------------------------------------------
+#         #use implement method
+#         img = mo.readGray(path=root_path+image_name+".png", color_value=0)
+#         original_size = img.shape
+#         filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+#         # print("filter", filtered_img.shape)
+#         # cv2.imshow(str(sc), filtered_img)
+#         # cv2.waitKey(0)
+#         image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+#         img_saved_path = im_saved_path + image_saved_name
+#         print(img_saved_path)
+#         cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+#
+#         #--------------------------------------------------
+#         # directly output from opencv-python (compare)
+#         py_img = cv2.imread(root_path+image_name+".png", 0)
+#         filtered_img = cv2.bilateralFilter(py_img, d=kernel_size, sigmaSpace=domain_sigma, sigmaColor=range_sigma)
+#         image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+#         img_saved_path = py_saved_path + image_saved_name
+#         print(img_saved_path)
+#         cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
 
 
-        # # cv2.imshow("first", img)
 
-        # # print(img.shape)
-        # # print(img.shape)
 
-        #------------------------------------------------------------
-        #use implement method
-        # img = mo.readGray(path=root_path+image_name+".png", color_value=0)
-        # original_size = img.shape
-        # filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
-        # # print("filter", filtered_img.shape)
-        # # cv2.imshow(str(sc), filtered_img)
-        # # cv2.waitKey(0)
-        # image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
-        # img_saved_path = im_saved_path + image_saved_name
-        # print(img_saved_path)
-        # cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
 
-        #--------------------------------------------------
-        # directly output from opencv-python (compare)
-        py_img = cv2.imread(root_path+image_name+".png", 0)
-        filtered_img = cv2.bilateralFilter(py_img, d=kernel_size, sigmaSpace=domain_sigma, sigmaColor=range_sigma)
-        image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
-        img_saved_path = py_saved_path + image_saved_name
-        print(img_saved_path)
-        cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+kernel_size= 21
+domain_sigma = 3
+range_sigma = 50
 
-    
+
+# # cv2.imshow("first", img)
+
+# # print(img.shape)
+# # print(img.shape)
+
+#------------------------------------------------------------
+#use implement method
+img = mo.readGray(path=root_path+image_name+".png", color_value=0)
+original_size = img.shape
+filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+# print("filter", filtered_img.shape)
+# cv2.imshow(str(sc), filtered_img)
+# cv2.waitKey(0)
+image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+img_saved_path = im_saved_path + image_saved_name
+print(img_saved_path)
+cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+
+#--------------------------------------------------
+# directly output from opencv-python (compare)
+py_img = cv2.imread(root_path+image_name+".png", 0)
+filtered_img = cv2.bilateralFilter(py_img, d=kernel_size, sigmaSpace=domain_sigma, sigmaColor=range_sigma)
+image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+img_saved_path = py_saved_path + image_saved_name
+print(img_saved_path)
+cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
 
 
 

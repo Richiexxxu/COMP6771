@@ -145,34 +145,94 @@ def filterimage(img, kernel_size, domain_sigma, range_sigma, original_size):
 
     return img_bilateral
 
+sigmaColor = [10, 30,50, 100, 300]
+sigmaSpace = [1, 3, 10]
+root_path = "original_paper_images/"
+image_name = "sky"
+py_saved_path = "output_color_image_python/"
+im_saved_path = "output_color_image/"
+# print(root_path+image_name+".png")
 
-kernel_size = 5
-img = mo.readColor(path="rubiks_cube.png", color_value=1)
+for ss in sigmaSpace:
+    for sc in sigmaColor:
 
-original_size = img.shape
-
-img = mo.cvtLAB(img=img)
-print(img.shape)
-
-cv2.imshow("test color",img)
-
-
-domain_sigma = 10
-range_sigma = 200
-filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
-
-print((np.min(filtered_img), np.max(filtered_img)))
-result_img = mo.cvtBGR(filtered_img)
-cv2.imshow("converted result", result_img)
-
-# test on python_opencv
-py_img = cv2.imread("rubiks_cube.png", 1)
-py_img = cv2.cvtColor(py_img, cv2.COLOR_BGR2LAB)
-py_result_img = cv2.bilateralFilter(py_img, d=5, sigmaSpace=10, sigmaColor=200)
-py_result_img = cv2.cvtColor(py_result_img, cv2.COLOR_LAB2BGR)
-cv2.imshow("rest from opencv python", py_result_img)
+        kernel_size= 21
+        domain_sigma = ss
+        range_sigma = sc
 
 
+        # # cv2.imshow("first", img)
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+        # # print(img.shape)
+        # # print(img.shape)
+
+        #------------------------------------------------------------
+        #use implement method
+        # img = mo.readGray(path=root_path+image_name+".png", color_value=0)
+        # original_size = img.shape
+        # filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+        # # print("filter", filtered_img.shape)
+        # # cv2.imshow(str(sc), filtered_img)
+        # # cv2.waitKey(0)
+        # image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+        # img_saved_path = im_saved_path + image_saved_name
+        # print(img_saved_path)
+        # cv2.imwrite(img_saved_path, filtered_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+        print(root_path + image_name + ".png")
+        img = mo.readColor(path=root_path + image_name + ".png", color_value=1)
+        original_size = img.shape
+        img = mo.cvtLAB(img=img)
+        print(img.shape)
+        filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+        result_img = mo.cvtBGR(filtered_img)
+
+        image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+        img_saved_path = im_saved_path + image_saved_name
+        print(img_saved_path)
+        cv2.imwrite(img_saved_path, result_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+
+        #--------------------------------------------------
+        # directly output from opencv-python (compare)
+        py_img = cv2.imread(root_path+image_name+".png", 1)
+        py_img = cv2.cvtColor(py_img, cv2.COLOR_BGR2LAB)
+        filtered_img = cv2.bilateralFilter(py_img, d=kernel_size, sigmaSpace=domain_sigma, sigmaColor=range_sigma)
+        py_result_img = cv2.cvtColor(filtered_img, cv2.COLOR_LAB2BGR)
+        image_saved_name = image_name + "_ds" + str(domain_sigma) + "_rs" + str(range_sigma) + ".png"
+        img_saved_path = py_saved_path + image_saved_name
+        print(img_saved_path)
+        cv2.imwrite(img_saved_path, py_result_img, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+
+
+
+
+
+# kernel_size = 5
+# img = mo.readColor(path="rubiks_cube.png", color_value=1)
+#
+# original_size = img.shape
+#
+# img = mo.cvtLAB(img=img)
+# print(img.shape)
+#
+# cv2.imshow("test color",img)
+#
+#
+# domain_sigma = 10
+# range_sigma = 200
+# filtered_img = np.uint8(filterimage(img, kernel_size=kernel_size, domain_sigma=domain_sigma, range_sigma=range_sigma, original_size=original_size))
+#
+# print((np.min(filtered_img), np.max(filtered_img)))
+# result_img = mo.cvtBGR(filtered_img)
+# cv2.imshow("converted result", result_img)
+#
+# # test on python_opencv
+# py_img = cv2.imread("rubiks_cube.png", 1)
+# py_img = cv2.cvtColor(py_img, cv2.COLOR_BGR2LAB)
+# py_result_img = cv2.bilateralFilter(py_img, d=5, sigmaSpace=10, sigmaColor=200)
+# py_result_img = cv2.cvtColor(py_result_img, cv2.COLOR_LAB2BGR)
+# cv2.imshow("rest from opencv python", py_result_img)
+#
+#
+#
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()

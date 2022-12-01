@@ -343,61 +343,6 @@ The result indicates that our re-implement method of Bilateral filter can output
 
 \begin{figure}[htbp]
   \centering
-  \subfigure[$\sigma_d=1, \sigma_r=10$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds1_rs10.png}
-  % \caption{fig1}
-  }
-  \quad
-  \subfigure[$\sigma_d=1, \sigma_r=30$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds1_rs30.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=1, \sigma_r=100$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds1_rs100.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=1, \sigma_r=300$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds1_rs300.png}
-  }
-
-  \subfigure[$\sigma_d=3, \sigma_r=10$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds3_rs10.png}
-  % \caption{fig1}
-  }
-  \quad
-  \subfigure[$\sigma_d=3, \sigma_r=30$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds3_rs30.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=3, \sigma_r=100$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds3_rs100.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=3, \sigma_r=300$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds3_rs300.png}
-  }
-
-  \subfigure[$\sigma_d=10, \sigma_r=10$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds10_rs10.png}
-  % \caption{fig1}
-  }
-  \quad
-  \subfigure[$\sigma_d=10, \sigma_r=30$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds10_rs30.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=10, \sigma_r=100$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds10_rs100.png}
-  }
-  \quad
-  \subfigure[$\sigma_d=10, \sigma_r=300$]{
-  \includegraphics[width=3.5cm]{output_image/cat_ds10_rs300.png}
-  }
-  \caption{A detail figure with bilateral filters with various range and domain parameter values by re-implement code of cat}
-  \end{figure}
-
-\begin{figure}[htbp]
-  \centering
 
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
   \includegraphics[width=7cm]{original_paper_images/snack.png}
@@ -416,11 +361,53 @@ The result indicates that our re-implement method of Bilateral filter can output
   \includegraphics[width=7cm]{output_image/onion_ds3_rs50.png}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python of cat}
-  \end{figure}
+\end{figure}
 
+These images above indicate some other experiments which utilized the images provided by the paper.
+
+There are some other color (3-channels) images which also indicate the successful re-implement of our code for bilateral filters.
+
+\begin{figure}[htbp]
+  \centering
+
+  \subfigure[$\sigma_d=1, \sigma_r=10$]{
+  \includegraphics[width=7cm]{original_paper_images/child.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=30$]{
+  \includegraphics[width=7cm]{output_color_image/child_ds3_rs10.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=100$]{
+  \includegraphics[width=7cm]{original_paper_images/rubiks_cube.png}
+  }
+  \quad
+  \subfigure[$\sigma_d=1, \sigma_r=300$]{
+  \includegraphics[width=7cm]{output_color_image/rubiks_cube_ds3_rs50.png}
+  }
+  \quad
+  \subfigure[sky]{
+  \includegraphics[width=7cm]{original_paper_images/sky.png}
+  }
+  \quad
+  \subfigure[sky code]{
+  \includegraphics[width=7cm]{output_color_image/sky_ds3_rs30.png}
+  }
+  \quad
+  \subfigure[home]{
+  \includegraphics[width=7cm]{original_paper_images/home.png}
+  }
+  \quad
+  \subfigure[home code]{
+  \includegraphics[width=7cm]{output_color_image/home_ds3_rs30.png}
+  }
+  \caption{Color images filtered by Bilateral filter}
+\end{figure}
 
 
 \subsection{Compare with other baseline algorithm}
 % in this section, compared with other blur algorithm
+In this section, we compared the filter result of Bilateral filter with other baseline algorithm to present the advantages of our code.
 
 \end{document}

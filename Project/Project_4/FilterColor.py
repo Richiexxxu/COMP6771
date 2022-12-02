@@ -206,6 +206,7 @@ for ss in sigmaSpace:
 
 
 
+
 # kernel_size = 5
 # img = mo.readColor(path="rubiks_cube.png", color_value=1)
 #

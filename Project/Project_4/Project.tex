@@ -14,6 +14,7 @@
 \usepackage{color}
 \usepackage{caption}
 \usepackage{subfigure}
+\usepackage{float}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -116,7 +117,7 @@ In this section, we will use the images in the paper[cite here] to show our resu
 
 Firstly, we present our result compared with the result indicated in the paper, with the same inputted parameters and the same pattern.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
   \includegraphics[width=3.5cm]{output_image/cat_part_ds1_rs10.png}
@@ -169,10 +170,12 @@ Firstly, we present our result compared with the result indicated in the paper, 
   \includegraphics[width=3.5cm]{output_image/cat_part_ds10_rs300.png}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by implement code}
+  \label{im_cateye}
   \end{figure}
 
+The Fig.~\ref{im_cateye} presents the result of out implement. In this experiments, we use $kernel\_size = 25$ and other parameters are totally the same as the paper, and we got the same trend of the blur as the paper get.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
   \includegraphics[width=3.5cm]{output_image_python/cat_part_ds1_rs10.png}
@@ -225,10 +228,11 @@ Firstly, we present our result compared with the result indicated in the paper, 
   \includegraphics[width=3.5cm]{output_image_python/cat_part_ds10_rs300.png}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python}
+  \label{py_cateye}
   \end{figure}
+Fig.~\ref{py_cateye} indicates that the similarity of output between our re-implement code and the build-in algorithm in python, in other ways prove the successful implement of our code. the output looks very similar.
 
-
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
   \includegraphics[width=3.5cm]{output_image/cat_ds1_rs10.png}
@@ -281,9 +285,10 @@ Firstly, we present our result compared with the result indicated in the paper, 
   \includegraphics[width=3.5cm]{output_image/cat_ds10_rs300.png}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by re-implement code of cat}
+  \label{im_cat}
   \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
   \includegraphics[width=3.5cm]{output_image_python/cat_ds1_rs10.png}
@@ -336,12 +341,17 @@ Firstly, we present our result compared with the result indicated in the paper, 
   \includegraphics[width=3.5cm]{output_image_python/cat_ds10_rs300.png}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python of cat}
+  \label{py_cat}
   \end{figure}
 
+Fig.~\ref{im_cat} and~\ref{py_cat} are also two image which prove the success of our re-implement code. 
+In Fig.~\ref{table}, we also present another images that presented on the paper. 
+As it presents, the salt and pepper noise can be removed, and also the edge information can be keeped as shown in Fig.~\ref{table_smmoth_onion} 
 
-The result indicates that our re-implement method of Bilateral filter can output the same grey result no matter compared with built-in opencv method or printed on paper.
 
-\begin{figure}[htbp]
+% The result indicates that our re-implement method of Bilateral filter can output the same grey result no matter compared with built-in opencv method or printed on paper.
+
+\begin{figure}[H]
   \centering
 
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
@@ -359,15 +369,17 @@ The result indicates that our re-implement method of Bilateral filter can output
   \quad
   \subfigure[$\sigma_d=1, \sigma_r=300$]{
   \includegraphics[width=7cm]{output_image/onion_ds3_rs50.png}
+  \label{table_smooth_onion}
   }
   \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python of cat}
+  \label{table}
 \end{figure}
 
 These images above indicate some other experiments which utilized the images provided by the paper.
 
 There are some other color (3-channels) images which also indicate the successful re-implement of our code for bilateral filters.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
 
   \subfigure[$\sigma_d=1, \sigma_r=10$]{
@@ -409,5 +421,34 @@ There are some other color (3-channels) images which also indicate the successfu
 \subsection{Compare with other baseline algorithm}
 % in this section, compared with other blur algorithm
 In this section, we compared the filter result of Bilateral filter with other baseline algorithm to present the advantages of our code.
+In this experiment, we not only compared the output result passed by different filters from human version level, but also calculate the PNSR[cite paper] from mathmatical level. 
+The equation of PNSR has been shwo in Equation:
+
+
+\begin{figure}[H]
+  \centering
+
+  \subfigure[mean]{
+  \includegraphics[width=7cm]{output_baseline/cat_mean_25.png}
+  % \caption{fig1}
+  }
+  \quad
+  \subfigure[median]{
+  \includegraphics[width=7cm]{output_baseline/cat_median_25.png}
+  }
+  \quad
+  \subfigure[gaussian]{
+  \includegraphics[width=7cm]{output_baseline/cat_gaussian_25.png}
+  }
+  \quad
+  \subfigure[Bilateral filter output]{
+  \includegraphics[width=7cm]{output_image/cat_ds10_rs10.png}
+  }
+  \caption{output compared with the baseline low pass filters}
+\end{figure}
+
+The result indicates that the Bilateral filter has advantages compared with other low pass filter such as median filter, mean filter and gaussian filter.
+
+
 
 \end{document}

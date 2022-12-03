@@ -15,6 +15,10 @@
 \usepackage{caption}
 \usepackage{subfigure}
 \usepackage{float}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -450,5 +454,64 @@ The equation of PNSR has been shwo in Equation:
 The result indicates that the Bilateral filter has advantages compared with other low pass filter such as median filter, mean filter and gaussian filter.
 
 
+% \begin{tabular}{cccccc}
+%   \toprule  
+%   Method& kernel\_size& $\sigma_d$& $\sigma_s$& PSNR\\
+%   \midrule 
+%   Bilateral Filter& 25& 1& 10 & 42.74\\
+%                   &   &  & 30 & 32.26\\
+%                   &   &  & 100& 32.59\\
+%                   &   &  & 300& 31.70\\
+%   \midrule
+%   Bilateral Filter& 25& 3& 10 & 40.05\\
+%                   &   &  & 30 & 31.37\\
+%                   &   &  & 100& 25.90\\
+%                   &   &  & 300& 24.39\\
+%   \midrule
+%   Bilateral Filter& 25& 10& 10 & 39.62\\
+%                   &   &   & 30 & 29.72\\
+%                   &   &   & 100& 22.38\\
+%                   &   &   & 300& 20.31\\
+%   \midrule
+%   Median filter & 25& None & None & 20.31\\
+%   Mean filter & 25 & None & None& 19.59\\
+%   Gaussian filter& 25& None& None& 31.59\\
+%   \bottomrule %添加表格底部粗线
+%   \caption{The result of PSNR of difference method}
+%   \label{}
+% \end{tabular}
+\begin{table}[]
+\begin{tabular}{lllll}
+\cline{1-5}
+Method & Kernel\_size & sigma\_s & Sigma\_r & PSNR  \\ \cline{1-1}
+\cline{1-5}
+\multirow{4}{*}{Bilateral Filter}   & \multirow{4}{*}{25} & \multirow{4}{*}    {1}                               & 10      & 42.74 \\
+       &             &            & 30      & 32.26     \\
+       &             &            & 100     & 32.59     \\
+       &             &            & 300     & 31.70     \\
+\cline{1-5}
+\multirow{4}{*}{Bilateral Filter}   & \multirow{4}{*}{25} & \multirow{4}{*}{3}  & 10       &40.05     \\
+      &              &            & 30       & 31.37     \\
+      &              &            & 100      & 25.90     \\
+      &              &            & 300      & 24.39     \\
+\cline{1-5}                                 
+\multirow{4}{*}{Bilateral Filteral} & \multirow{4}{*}{25} & \multirow{4}{*}{10} & 10       & 39.62     \\
+     &               &            & 30       & 29.72     \\
+     &               &            & 100      & 22.38     \\
+     &               &            & 300      & 20.31     \\
+\cline{1-5}
+Median filter       & 25          & None    & None     & 20.31     \\
+Mean filter         & 25          & None    & None     & 19.59     \\
+Gaussian filter          & 25           & None    & None     & 31.59    
+\end{tabular}
+\caption{The PSNR output of bailteral filter and baseline filters}
+\label{table_PSNR}
+\end{table}
+The Tabel.~\ref{table_PSNR} presents the PSNR reult compared with Bilater filter and other baseline filters.
+
+In the experiment, we use $kernel\_size = 25$ for all filters, but the same parameters as before in the paper. 
+The result shows that the bilateral filter has advantages compared with other baseline low-pass filter. 
+Only the Gaussian filter obtains $PSNR = 31.59$ which is very close with some result of the bilater filter and over some bery blur bilateral filters.
+But still not good as the result with some very clean Bilater filters.
 
 \end{document}

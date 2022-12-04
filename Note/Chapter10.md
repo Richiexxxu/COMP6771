@@ -121,9 +121,6 @@
    
 
 ##### Optimum Gloval Thresholding using OTSU'S Method
+- Statistical-decision: minimize the average error incurred in assigning pixels to two or more groups (classes).
 
-- A statistical-decision theory problem whose objective is to minimize the average error incurred in assigning pixels to two or more groups(classes).
-- Otsu's method:
-  - The method is optimum in the sense that it maximizes the between-class variance, a measure used in statistical discriminant analysis. 
-    - properly thresholded classed should be distinct with respect to the intensity values of their pixels and, conversely, that a threshold giving the best reparation between classes in terms of their intensity values would be the best(optimum) threshold.
-    - 
+

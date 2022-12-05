@@ -92,138 +92,15 @@
 % \vspace*{40em}
 \item Theoretical Question 1
 
-    
-    Based on the question, the mask is:
-        \begin{equation}
-            g(x, y) = \frac{1}{4}[f(x, y-1) + f(x, y+1) +f(x-1, y) +f(x+1, y)]  
-            \label{q1_eq1}    
-        \end{equation}
-        Also, 
-        \begin{equation}
-            f(x - x_{0}, y - y_{0}) = F(u, v)e^{-j2 \pi (ux_{0}/M + vy_{0}/N)}
-            \label{q1_eq2}
-        \end{equation}
-
-        Based on the Eq.~\ref{q1_eq2}, the Eq.~\ref{q1_eq1} can be calculated like:
-        \begin{equation}
-            \begin{aligned}
-                f(x, y-1)
-                &= f(x - 0, y -(1))\\
-                &= F(u, v)e^{-j2\pi(u(0)/M + v(1)/N)}\\
-                &= F(u, v)e^{-j2\pi v/N}
-                \label{q1_eq3}
-            \end{aligned}
-        \end{equation}
-        
-        \begin{equation}
-            \begin{aligned}
-                f(x, y+1) 
-                &= f(x-0, y-(-1))\\
-                &= F(u, v)e^{-j2\pi (u(0)/M + v(-1)/N)}\\
-                &= F(u, v)e^{j2\pi v/N}
-            \label{q1_eq3}
-            \end{aligned}
-        \end{equation}
-
-        \begin{equation}
-            \begin{aligned}
-                f(x-1, y) 
-                &= f(x-(1), y-0)\\
-                &= F(u, v)e^{-j2\pi(u(1)/M + v(0)/N)}\\
-                &= F(u, v)e^{-j2\pi u/M}
-            \label{q1_eq4}
-            \end{aligned}
-        \end{equation}
-
-        \begin{equation}
-            \begin{aligned}
-                f(x+1, y) 
-                &= f(x-(-1), y-0)\\
-                &= F(u, v)e^{-j2\pi(u(-1)/M + v(0)/N)}\\
-                &= F(u, v)e^{j2\pi u/M}
-            \label{q1_eq5}
-            \end{aligned}
-        \end{equation}
-        
-        So, based on the Eq.~\ref{q1_eq2} ~\ref{q1_eq3} ~\ref{q1_eq4} ~\ref{q1_eq5}, 
-
-        \begin{equation}
-            G(u, v) = \frac{1}{4} F(u, v) [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{-j2\pi u/M} + e^{j2\pi u/M}]
-        \end{equation}
-
-        \begin{equation}
-            H(u, v) = \frac{1}{4} [e^{-j2\pi v/N} + e^{j2\pi v/N} + e^{-j2\pi u/M} + e^{j2\pi u/M}]
-        \end{equation}
-
-        Based on the Euler's Formula, $\cos \theta = \frac{1}{2}(e^{i \theta} + e^{-i \theta})$,
-
-        \begin{equation}
-            \begin{aligned}
-                H(u, v)
-                &= \frac{1}{4}F(u, v)[2\cos(\frac{2 \pi v}{N} + 2\cos(\frac{2\pi u}{M}))]\\
-                &= \frac{1}{2}F(u, v)[\cos(\frac{2 \pi v}{N} + \cos(\frac{2\pi u}{M}))]
-            \end{aligned}
-        \end{equation}
-
-    \vspace*{7em}
-
 \item Theoretical Question 2
 
-\begin{enumerate}
-    \item  If an equation is linear, which means that:
-    \begin{equation}
-        O(af_{1}(x, y) + bf_{2}(x, y)) = aO(f_{1}(x, y)) + bO(f_{2}(x, y))
-        \label{q2_eq1}
-    \end{equation}
-    In Eq.~\ref{q2_eq1}, the $O()$ is an operator.
-    So in this queation:
-    \begin{equation}
-        \begin{aligned}
-        O(af_{1}(x, y) + bf_{2}(x, y))
-        &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(af_1(x, y) + bf_2(x, y))\delta(x\cos\theta + y\sin\theta - \rho)dxdy\\
-        &= a\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_1(x, y)\delta(x\cos\theta + y\sin\theta - \rho)dxdy + \\
-        & b\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_2(x, y)\delta(x\cos\theta + y\sin\theta - \rho)dxdy\\
-        &= aO(f_1(x, y)) + bO(f_2(x, y))
-        % \label(q2_eq2)
-        \end{aligned}
-    \end{equation}
-    So it is linear operator.
+\item Theoretical Question3
 
-    \item Based on the priciple of Integral by substitution:
-    \begin{equation}
-     \begin{aligned}
-        u = x - x_0\\
-        v = y - y_0
-        \end{aligned}
-    \end{equation}
+Suppose, the radiu of the big circle is $R_1$ and the small circle is $R_2$.
+First, we can find the number of the big circle first.
+suppose the radio of the big circle is $r_b$ and the broader of the big circle is 
 
-    \begin{equation}
-        \begin{aligned}
-            x = u + x_0\\
-            y = v + y_0
-        \end{aligned}
-    \end{equation}
 
-    \begin{equation}
-        \begin{aligned}
-            du = dx \\
-            dv = dy
-        \end{aligned}
-    \end{equation}
-
-    So, 
-    \begin{equation}
-        \begin{aligned}
-                f(\rho, \theta)
-                &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x - x_0, y - y_0) \delta(x\cos\theta + y\sin\theta - \rho)dxdy\\
-                &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(u, v)\delta[(u + x_0)\cos\theta + (v + y_0)\sin\theta - \rho)dudv\\
-                &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(u, v)\delta(u\cos\theta + x_0\cos\theta + v\sin\theta + y_0\sin\theta - \rho)dudv\\
-                &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(u, v)\delta(u\cos\theta + v\sin\theta - (\rho - x_0\cos\theta - y_0\sin\theta))dudv\\
-                &= g(\rho - x_0\cos\theta - y_0\sin\theta, \theta)
-        \end{aligned}
-    \end{equation}    
-
-\end{enumerate}
 
 \item Programming Question 1 
 \begin{enumerate}

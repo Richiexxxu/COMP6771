@@ -124,6 +124,7 @@ Finally, we will discuss about the Bilateral filter from both advantages and dis
 The main purpose for this section is providing an provement of the successful re-implement of the Bilateral filter.
 During our experiment, we use the images from the Bilateral filter paper[cite here], inputted the same parameters that the paper utilized, and compared our result with the oroginal paper and also the build-in function with Opencv-python offcial to prove the successfully re-implement of our code.
 
+\subsubsection{Test result on gray images}
 Firstly, we present our result compared with the result indicated in the paper, with the same inputted parameters and the same pattern.
 In the papre, the author use the parameters $\sigma_d = (1, 3, 10)$ and $\sigma_r = (10, 30, 100, 300)$ correspond to each consisting the parameter set.  
 We also use the $kernel\_size = 25$.
@@ -365,36 +366,37 @@ Fig.~\ref{im_cat} are some other outputs use the cat image from paper and the sa
 The same as the figures from the paper, some detils, such as the Kitten's whiskers, also can be remained after filtering.
 
 % Fig.~\ref{im_cat} are also two image which prove the success of our re-implement code. 
-In Fig.~\ref{table}, we also present another images that presented on the paper. 
-As it presents, the salt and pepper noise can be removed, and also the edge information can be keeped as shown in Fig.~\ref{table_smmoth_onion} 
+The Fig.~\ref{snack} are some other outputs use the figures from Bilateral filter paper.  
+The Fig.~\ref{snack_original}, ~\ref{snack_onion} are the oroginal images.
+As present in Fig.~\ref{snack_original_smooth}, the salt and pepper noise can be removed, at the mean time, the edge information can be keeped as shown in Fig.~\ref{snack_onion_smooth}.
 
-
-% The result indicates that our re-implement method of Bilateral filter can output the same grey result no matter compared with built-in opencv method or printed on paper.
 
 \begin{figure}[H]
   \centering
-
-  \subfigure[$\sigma_d=1, \sigma_r=10$]{
+  \subfigure[$\sigma_d=3, \sigma_r=50$]{
   \includegraphics[width=7cm]{original_paper_images/gray/snack.png}
-  % \caption{fig1}
+  \label{snack_original}
   }
   \quad
-  \subfigure[$\sigma_d=1, \sigma_r=30$]{
+  \subfigure[$\sigma_d=3, \sigma_r=50$]{
   \includegraphics[width=7cm]{output_image/snack_ds3_rs50.png}
+  \label{snack_original_smooth}
   }
   \quad
-  \subfigure[$\sigma_d=1, \sigma_r=100$]{
+  \subfigure[$\sigma_d=3, \sigma_r=50$]{
   \includegraphics[width=7cm]{original_paper_images/gray/onion.png}
+  \label{snack_onion}
   }
   \quad
-  \subfigure[$\sigma_d=1, \sigma_r=300$]{
+  \subfigure[$\sigma_d=3, \sigma_r=50$]{
   \includegraphics[width=7cm]{output_image/onion_ds3_rs50.png}
-  \label{table_smooth_onion}
+  \label{snack_onion_smooth}
   }
-  \caption{A detail figure with bilateral filters with various range and domain parameter values by Opencv python of cat}
-  \label{table}
+  \caption{The Bilater filtering result of snacks and the Onion detail}
+  \label{snack}
 \end{figure}
 
+\subsubsection{Test result on color images}
 These images above indicate some other experiments which utilized the images provided by the paper.
 
 There are some other color (3-channels) images which also indicate the successful re-implement of our code for bilateral filters.

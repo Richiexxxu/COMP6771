@@ -110,7 +110,7 @@ cv2.imwrite("Figures/ostu_py.png", b_img)
 
 
 img = imgread(path = "tools_noisy.png")
-blur_img = np.uint8(averagingFilter(input_image=img, filter_size=7))
+blur_img = np.uint8(averagingFilter(input_image=img, filter_size=5))
 blur_value_his, blur_value_prob = generateHis(img=blur_img, L = 256)
 blur_th = Ostu(img=blur_img, value_his=blur_value_his, value_prob=blur_value_prob, L=256)
 print(blur_th)
@@ -120,7 +120,7 @@ cv2.imshow("test blur", blur_img)
 cv2.imwrite("Figures/ostu_average.png", blur_img)
 
 py_img = imgread(path="tools_noisy.png")
-py_blur_img = cv2.blur(img, ksize=(7, 7), borderType=cv2.BORDER_REFLECT)
+py_blur_img = cv2.blur(img, ksize=(5, 5), borderType=cv2.BORDER_REFLECT)
 retVal_b, blur_b_img = cv2.threshold(py_blur_img, 0, 255, cv2.THRESH_OTSU)
 print(retVal_b)
 cv2.imshow('test_blur python', blur_b_img)

@@ -4,7 +4,8 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{newtxtext, newtxmath}
-\usepackage{enumitem}
+% \usepackage{enumitem}
+\usepackage{enumerate}
 \usepackage{titling}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{graphicx}
@@ -13,6 +14,7 @@
 \usepackage{xcolor}
 \usepackage{color}
 \usepackage{subfigure}
+% \usepackage{enumerate}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -44,7 +46,7 @@
 \setlength{\droptitle}{-6em}
 
 % Enter the specific assignment number and topic of that assignment below, and replace "Your Name" with your actual name.
-\title{Assignment 3: Comp 6771 Image Processing}
+\title{Assignment 4: Comp 6771 Image Processing}
 \author{Yunqi Xu 40130514}
 \date{\today}
 
@@ -61,7 +63,7 @@
     %    Title
     %------------------------------------------------------------
 
-    {\Huge COMP 6771 Image Processing: Assignment 2}
+    {\Huge COMP 6771 Image Processing: Assignment 4}
 
     \vspace{0.025\textheight}   % Whitespace between the title and short horizontal rule
 
@@ -88,17 +90,73 @@
     \rule{\textwidth}{1pt}  % The bottom horizontal rule
 \end{titlepage}
 
-\begin{enumerate}[leftmargin=\labelsep]
+\begin{enumerate}[1]
 % \vspace*{40em}
-\item Theoretical Question 1
+\item Theoretical Question 1\\
+\\
+The detaion has been shown in Fig.~\ref{A4_q1}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth, height=\textwidth, angle = 270]{Figures/A4_q1.jpg}
+        \caption{Question1}
+        \label{A4_q1}
+    \end{figure}
 
-\item Theoretical Question 2
+\item Theoretical Question 2\\
+\\
+The main purpose of hough transform is find intersection points in parameter plane. 
+For a point $(x_1, y_1)$,  suppose all the lines pass through it and transfor into the parameter space is $b = ax_1 + y_1$ and for another point $(x_2, y_2)$, suppose all the lines pass through this point transfor into the parameter space is $b = ax_2 + y_2$, the intersection between these two lines are $(a_b, b_0)$, which is the slope and intercept of a line in the Cartesian coordinate system pass through both $(x_1, y_1)$ and $(x_2, y_2)$ if they are on the same line. 
+But for a line $y = kx +b$ if it is a vertical line, the slope k is approach infinity. 
+And it is impossible to represent values of infinity k. 
+Due to this reason, the normal represent is an alternative solution.
 
-\item Theoretical Question3
+    \begin{enumerate}[Step1:]
+        \item Set Equation: $ \rho = x \cos(\theta) + y \sin(\theta)$\\
+              Set Parameters: $threshold$;
+                              Point $P_n = (x_n, y_n)$;
+                              $\rho \in [\rho_{min}, \rho_{max}]$;
+                              $\theta \in [\theta_{min}, \theta_{max}]$
+        \item Split $\theta$ generate the $set_\theta = \{\theta_1, \theta_2, ..., \theta_u\}$.
+        \item Split $\rho$ generate the $set_\rho = \{\rho_1, rho_2, ..., \rho_v\}$.
+        \item Set $Bin$ is a 2D-array with $(u, v)$ dimensions, and initialize values in Bin into 0.
+        \item For each point $P_i$ in ${P_1, P_2, ..., P_n}$ do:\\
+                Loop $\theta_i$ in $set_\theta$ and calculate $\rho_j$ based on the equation defined in Step1.\\
+                Based on the $(\theta_i, \rho_j)$ find $(position_i, position_j)$ in $set_\theta$ and $set_\rho$.\\
+                Then $Bin[position_i][position_j] += 1$
+        \item For all $V_m$ in $Bin$,if $V_m > threshold$ do:\\
+                Find $position_\theta$ and $position_\rho$ in $set_\theta$ and $set_\rho$ based on the position in Bin.\\
+                Suppose $\theta_i = set_\theta[position_\theta]$, $\rho_j = set_\rho[position_\rho]$ are values from the two positions.\\
+                Then those points located on the line $\rho_j = x * \cos(\theta_i) + y * \sin(\theta_i)$ compose an edge.
+        \item Finally find all target edges.
+                
+    \end{enumerate}
 
-Suppose, the radiu of the big circle is $R_1$ and the small circle is $R_2$.
-First, we can find the number of the big circle first.
-suppose the radio of the big circle is $r_b$ and the broader of the big circle is 
+
+
+
+\item Theoretical Question3\\
+\\
+The algorithm we use for recognize the bigger dots is Hit-or-Miss Transform. 
+The Hit-or-Miss algorithm is a basic tool for shape detection.
+Hit-or-Miss use two structuring elements. 
+$B_1$ for detecting shapes in the foreground, and $B_2$ for detecting shapes in the background.
+And following the equation: 
+$$ I \circledast B_{1,2} = (A \ominus B_1) \cap (A^c \ominus B_2) $$
+Where, A is the union of objects and $A^c$ is the complement of A.
+
+
+
+So, in our case, suppose the radius is $r$. 
+The steps are described below. 
+
+\begin{enumerate}[Step1:]
+    \item $B_1$ is a dot with radius $= r$, which has the same pattern as the big dot in image.
+    \item Set $W$ is a 1 pixel dilated version of $B_1$, and $B_2 = W - B_1$.
+    \item Erosion $A$ with $B_1$ and get the output $A_1$
+    \item Erosion $A^c$ with $B_2$ and get the output $A_2$.
+    \item Find the intersection between $A_1$ and $A_2$ and get the output $A_3$.
+    \item Calculate the number of remaining points in foreground, the number N is the result.
+\end{enumerate}
 
 
 
@@ -214,7 +272,7 @@ suppose the radio of the big circle is $r_b$ and the broader of the big circle i
 
 
     img = imgread(path = "tools_noisy.png")
-    blur_img = np.uint8(averagingFilter(input_image=img, filter_size=7))
+    blur_img = np.uint8(averagingFilter(input_image=img, filter_size=5))
     blur_value_his, blur_value_prob = generateHis(img=blur_img, L = 256)
     blur_th = Ostu(img=blur_img, value_his=blur_value_his, value_prob=blur_value_prob, L=256)
     print(blur_th)
@@ -224,7 +282,7 @@ suppose the radio of the big circle is $r_b$ and the broader of the big circle i
     cv2.imwrite("Figures/otsu_average.png", blur_img)
 
     py_img = imgread(path="tools_noisy.png")
-    py_blur_img = cv2.blur(img, ksize=(7, 7), borderType=cv2.BORDER_REFLECT)
+    py_blur_img = cv2.blur(img, ksize=(5, 5), borderType=cv2.BORDER_REFLECT)
     retVal_b, blur_b_img = cv2.threshold(py_blur_img, 0, 255, cv2.THRESH_OTSU)
     print(retVal_b)
     cv2.imshow('test_blur python', blur_b_img)
@@ -234,8 +292,7 @@ suppose the radio of the big circle is $r_b$ and the broader of the big circle i
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 \end{lstlisting}
-
-\item The images are shown below:
+The images are shown below:
 
     \begin{figure}[H]
         \centering
@@ -274,6 +331,7 @@ And the result indicates that our re-implement can achieve the same output as th
 The fig.~\ref{Q3_b} present the result between the re-implement Otsu's algorithm with averaging filter compared with the build-in python otsu's algorithm.
 And the result indicates taht our re-implemnet can achieve the same output as the build-in python algorithm.
 Compared with the Fig.~\ref{Q3_a} and Fig.~\ref{Q3_b}, the salt and pepper noises in Fig.~\ref{Q3_a} are removed after the averaing filter.
+Because after smooth, the threshold moved from 149 to 140, in this case, the noise can be removed.
 
 \end{enumerate}
 
@@ -328,20 +386,20 @@ Compared with the Fig.~\ref{Q3_a} and Fig.~\ref{Q3_b}, the salt and pepper noise
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.5\textwidth,height=0.5\textwidth]{Figures/Haar1.png}
+        \includegraphics[width=0.7\textwidth,height=0.7\textwidth]{Figures/Haar1.png}
         \caption{Haar level 1}
         \label{Q4_a_level1}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.5\textwidth,height=0.5\textwidth]{Figures/Haar2.png}
+        \includegraphics[width=0.7\textwidth,height=0.7\textwidth]{Figures/Haar2.png}
         \caption{Haar level 2}
         \label{Q4_a_level2}
     \end{figure}
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.5\textwidth,height=0.5\textwidth]{Figures/Haar3.png}
+        \includegraphics[width=0.7\textwidth,height=0.7\textwidth]{Figures/Haar3.png}
         \caption{Haar level 3}
         \label{Q4_a_level3}
     \end{figure}
@@ -417,12 +475,16 @@ Compared with the Fig.~\ref{Q3_a} and Fig.~\ref{Q3_b}, the salt and pepper noise
     
     Fig.~\ref{Q4_b_level1}, ~\ref{Q4_b_level2}, ~\ref{Q4_b_level3} present the result of the Daubechies4 wavelet.
 
-    \item The figure present the comparison between the level 3 approximation image of Haar and the lavel 3 approximation image of Daubechies4.
-    The result indicates that the Daubechies4 has a more smooth result compared with the result of Haar.
+    \item The Fig.~\ref{Q4_c_compare} present the comparison between the level 3 approximation image of Haar and the lavel 3 approximation image of Daubechies-4.
+    The result indicates that the Daubechies-4 has smoother result compared with Haar.
+    Because, the Haar wavelet is resembles a step functions and have one vanishing moment. 
+    But Daubechies-4 averages over more pixels and it has more vinishing moments for giving compact support. 
+    More vinishing moment will make the result smoother than the Haar wavelet.
+
     
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.7\textwidth, height=0.5\textwidth]{Figures/compare.png}
+        \includegraphics[width=0.9\textwidth, height=0.5\textwidth]{Figures/compare.png}
         \caption{Comparison between Haar and Daubechies-4 in level 3}
         \label{Q4_c_compare}
     \end{figure}

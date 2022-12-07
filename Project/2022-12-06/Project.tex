@@ -77,6 +77,9 @@ The bilateral filter smoothing image and preserve edges information at the meanw
 The main method that the bilateral filter utilized are two Gaussian filters. 
 One is calcualted based on the Geometric closeness. 
 Another is calculated based on their photometric similarity
+Below is the process of Bilateral Filtering an image:
+% add the processing step
+
 % achievement
 
 
@@ -460,6 +463,11 @@ The Tabel.~\ref{table_PSNR} presents the PSNR reult compared with Bilater filter
 % The result shows that the bilateral filter has advantages compared with other baseline low-pass filter. 
 % Only the Gaussian filter obtains $PSNR = 31.59$ which is very close with some result of the bilater filter and over some bery blur bilateral filters.
 % But still not good as the result with some very clean Bilater filters.
+%
+
+%------------compare with this baseline filter
+
+
 
 \section{Conclusion}
 \label{section conclusion}
@@ -467,5 +475,20 @@ In this section, we will provide the pros and cons of the methods.
 The methods we used in this report that comes from the lecture.
 finally, we will provide some brief discription about the difficulties we faced.
 
+\subsection{Pros and Cons}
+Pros:
+
+The Bilateral filter can keep the edge meanwhile blur the noise.  
+
+Cons:
+
+When Bilateral neighborhood size gets larger, the Bilateral filtering is slow. 
+\subsection{Method used}
+
+
+\subsection{difficulties}
+
+The first difficulties is implement the $\sigma_r$ in the color image. 
+The second is the transform of CIE-lab space. 
 
 \end{document}

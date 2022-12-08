@@ -68,23 +68,33 @@
 
 \section{Review}
 \subsection{Review of Bilateral Filter}
+\label{subsection review bilateral}
 % overall summary of bilateral filter
-Bilateral filter is an angorithm which is nonlinear, edges perserving and Gaussian denoising method proposed by Tomasi in 1998[cite]. 
+Bilateral filter was proposed by Tomasi in 1998[cite here], Which is edges keeping, noises removing, simple and non-iterative,multi-channels suitable method, consisted by two filters, Geometric closeness(domain filter$\sigma\_d$) and photometric similarity(range filter$\sigma\_s$).  
+% Bilateral filter is an angorithm which is nonlinear, edges perserving and Gaussian denoising method proposed by Tomasi in 1998[cite]. 
+
+% Bilateral filter utilizes two gaussian like filter, geometric closeness and pholometric similarity, to solve the problem 
 
 % review of the bilateral filter method
-The main method that the bilateral filter utilized are two Gaussian filters. 
-One is calcualted based on the Geometric closeness. 
-Another is calculated based on their photometric similarity
-Below is the process of Bilateral Filtering an image:
+% The main method that the bilateral filter utilized are two Gaussian filters. 
+% One is calcualted based on the Geometric closeness. 
+% Another is calculated based on their photometric similarity
+% Below is the process of Bilateral Filtering an image:
 % add the processing step
 
 % achievement
+The process of Bilateral filter is shown blow:
 \begin{enumerate}[Step1:]
 \item Calculate Domain filter based on the $\sigma_d$ and $k\_size$, $c(\xi, x) = e^{-\frac{1}{2}(\frac{d(\xi, x)}{\sigma_{d}})^2}$, where, $d(\xi, x)$ is the Euclidean distance between $\xi$ and $x$.
 \item for a certain position $(x, y)$ in an input image, calculate Range filter based on the $\sigma_r$, $k\_size$ and input image, $s(\xi, x) = e^{-\frac{1}{2}(\frac{\delta(f(\xi), f(x))}{\sigma_{r}})^{2}}$, where, $\delta(\phi, f)$ is a suitable measure of distance between the two intensity value $\phi$ and f.
 \item Calculate the sum of mutiple between domain filter * range filter with a pitch($size = k\_size * k\_size)$ of input image which the center is $(x, y)$ to fet a new value of (x, y).
 \item Repeat Step 2 and Step 3 until all pixel are visited. 
 \end{enumerate}
+
+The Bilateral filter can significantly solve the slow spatial variantion fails at edges, which usually occurs with tranditional Gaussian filters, and the complexity of many iteration that brought by Diffusion method. 
+The result in the Bilateral filter[cite here] indicates that it is suitable from both gray and color images. 
+However, in the evluation of the paper, the lack of quantitive comparison between bilateral filter and other baseline method make it difficult to generate though with readers.
+
 
 
 
@@ -463,6 +473,11 @@ Gaussian filter          & 25           & None    & None     & 31.59
 \end{table}
 The Tabel.~\ref{table_PSNR} presents the PSNR reult compared with Bilater filter and other baseline filters.
 
+
+As we mentioned in Section~\ref{section Bilateral_filter}, the tranditional low pass filter, especially the Gaussian filter, compute the weighted average of pixel values in the neighborhood and intuition that pixels from one image have a slow spatial variation. 
+But this assumption fails when filtering edges.
+
+
 % In the experiment, we use $kernel\_size = 25$ for all filters, but the same parameters as before in the paper. 
 % The result shows that the bilateral filter has advantages compared with other baseline low-pass filter. 
 % Only the Gaussian filter obtains $PSNR = 31.59$ which is very close with some result of the bilater filter and over some bery blur bilateral filters.
@@ -481,18 +496,33 @@ finally, we will provide some brief discription about the difficulties we faced.
 
 \subsection{Pros and Cons}
 Pros:
-
-The Bilateral filter can keep the edge meanwhile blur the noise.  
+In our re-implement, we prove the success of Bilateral filter in edge preserving and  denoising. 
+We also quantitive compared the Bilateral filter with other baseline denoising filtering in terms of PSNR. 
+% The Bilateral filter can keep the edge meanwhile blur the noise.  
 
 Cons:
+When Bilateral neighborhood size gets larger, the Bilateral filtering is slow.
+Since we use loop in the filtering processing to filter the input image. 
+The larger the filter size is, the slower the algorithm will be excused.
+Compared with the build-in opencv-python Bilater method, our re-implement comsumsed more time especially when dealing with color and large size image with larger kernel size.
+On the other hand, the drawbacks of our evaluation method still insufficient. 
+Because sometimes the PSNR may not reflect the correct subjective quality of the image.
+PSNR values sometimes do not match the visual quality perceived by the human eye, such as the PSNR does not represent the visual perceptual properties of the human eye well.
+Also, PSNR is not sensitive with structural changes when blurring occur.  
+PSNR has some limination, it may not correct reflect the result in some case.
 
-When Bilateral neighborhood size gets larger, the Bilateral filtering is slow. 
 \subsection{Method used}
 
+The methods we used in this paper, including padding before filtering. 
+During our experiment, the reflect padding can provide a better result, so we keep the refect padding as the final version of our re-implement.
+During the comparison process, we use PSNR as the evaluation method.
+Also, the comparison low-pass fitler we choose are some classic blur filters, mean, median and gaussian filters.
 
 \subsection{difficulties}
 
 The first difficulties is implement the $\sigma_r$ in the color image. 
-The second is the transform of CIE-lab space. 
+Since all the information indicates how to calculate the $\sigma\_r$ in 3-channels are separate inside the paper.
+The second is the transform of CIE-lab space.
+Since the CIE-lab has different value comapred with RBG color space, the order of pre-processing images before filter become important if we want get a correct output.
 
 \end{document}

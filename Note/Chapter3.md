@@ -1,8 +1,13 @@
 # Intensity Transformations and Spatial Filtering
 
 ## 3.1 Background
+Spatial domain
 
 ## 3.2 Some Basic Intensity Transformation Functions
+ - $g(x, y) = T[f(x, y)]$
+    Where $f(x, y)$ --> input image; 
+    &emsp; $g(x, y)$ --> output image; 
+    &emsp; $T$ --> operator on $f$ defined over a neighborhood of point $(x, y)$.
 
 ## 3.3 Histogram Processing 
 
